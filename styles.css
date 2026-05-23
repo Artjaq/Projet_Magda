@@ -449,9 +449,11 @@ a {
 }
 
 .contact-grille {
-  padding: 3rem 0 5rem;
+  /* Padding horizontal sur mobile pour éviter la sensation étriquée */
+  padding: 3rem clamp(1.25rem, 5vw, 1.5rem) 5rem;
   display: grid;
-  gap: 3rem;
+  /* Gap plus grand : respiration entre formulaire et bloc infos */
+  gap: 4rem;
 }
 
 /* Formulaire */
@@ -481,7 +483,8 @@ a {
   font-size: 1rem;
   color: var(--texte);
   background-color: var(--fond);
-  border: 1px solid var(--sable);
+  /* Bordure renforcée : brun texte à 20% — visible sans être agressif */
+  border: 1px solid rgba(42, 36, 32, 0.2);
   padding: 0.85rem 1rem;
   transition: border-color 0.2s ease;
   outline: none;
@@ -508,10 +511,10 @@ a {
   letter-spacing: 0;
 }
 
-/* Prénom + Nom sur la même ligne */
+/* Prénom + Nom : empilés sur mobile, côte à côte au-dessus de 520px */
 .champs-nom {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -519,7 +522,8 @@ a {
 .contact-infos {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  /* Gap augmenté : respiration entre "Par e-mail", "Instagram", "Basée en" */
+  gap: 2.5rem;
   padding-top: 0.5rem;
 }
 
@@ -619,6 +623,28 @@ a {
   margin: 0 auto;
   font-size: 0.78rem;
   color: rgba(244, 239, 230, 0.3);
+}
+
+/* ==============================================
+   MOBILE STRICT (≤ 519px) — ajustements tactiles
+   ============================================== */
+
+@media (max-width: 519px) {
+  /* Inputs plus hauts pour le confort tactile */
+  .champ input,
+  .champ textarea {
+    padding: 1rem 1rem;
+  }
+}
+
+/* ==============================================
+   BREAKPOINT 520px — Prénom/Nom côte à côte
+   ============================================== */
+
+@media (min-width: 520px) {
+  .champs-nom {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* ==============================================
