@@ -1,0 +1,13 @@
+# Contenu de la page Contact — modifiable via Decap CMS → "Page Contact"
+# Email et Instagram proviennent de site.yaml (données globales).
+
+surtitre: "Écrire à Magda"
+titre: "Parlons de votre projet"
+intro: >-
+  Vous avez une envie de pièce sur mesure, une question sur les créations disponibles,
+  ou simplement l'envie d'échanger ? Magda vous répond personnellement, avec plaisir.
+
+instagram_desc: "Pour suivre les créations en cours et les nouvelles pièces disponibles."
+
+localisation: "Suisse romande"
+localisation_desc: "Les pièces sont disponibles sur commande, en livraison ou à récupérer sur place."

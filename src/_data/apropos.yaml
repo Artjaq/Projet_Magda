@@ -1,0 +1,37 @@
+# Contenu de la page À propos — modifiable via Decap CMS → "Page À propos"
+
+surtitre: "La créatrice"
+titre_page: "L'atelier de Magda"
+image_bio: ""
+titre_bio: "Trente ans<br>de fil en aiguille"
+# Arthur : titre_bio contient un <br> pour reproduire le saut de ligne du design original.
+# Affiché avec | safe dans le template. Magda ne devrait pas modifier ce champ seule.
+
+biographie: |
+  Tout a commencé avec une machine à coudre héritée de sa grand-mère et une armoire pleine de coupons de tissu. Magda a appris en observant, en défaisant, en recommençant — jusqu'à ce que les gestes deviennent naturels, presque instinctifs. Depuis lors, l'atelier n'a jamais cessé de bourdonner.
+
+  Installée en Suisse romande depuis toujours, elle puise son inspiration dans les paysages qui l'entourent : la laine couleur de sous-bois en automne, le lin ivoire des brumes matinales, les textures rugueuses des montagnes. Chaque pièce est une réponse à une saison, à une humeur, à une envie de matière.
+
+  Ce qui distingue le travail de Magda, c'est l'attention portée à chaque détail invisible : la couture intérieure aussi soignée que l'extérieur, le choix d'un bouton assorti au grain du tissu, l'ourlet qui tombe juste. Des petits riens qui font qu'un vêtement se porte pendant des années, et qu'on ne se résout jamais vraiment à s'en séparer.
+
+lien_bio_label: "Contacter Magda →"
+
+processus:
+  titre: "Mon processus"
+  sous_titre: "De la pelote au vêtement, chaque étape est réalisée à la main, sans précipitation."
+  etapes:
+    - titre: "Les matières"
+      texte: >-
+        Tout commence par le choix du fil ou du tissu. Magda privilégie les matières naturelles —
+        laine vierge, alpaga, lin, coton biologique — sélectionnées auprès de petits fournisseurs
+        ou chinées dans des marchés spécialisés. La main du tissu, c'est le premier critère.
+    - titre: "La conception"
+      texte: >-
+        Avant de couper la moindre pièce, Magda dessine, ajuste, froisse et recommence.
+        Ses patrons naissent sur papier, souvent inspirés de formes anciennes revisitées.
+        Elle pense chaque vêtement pour qu'il s'adapte au corps qui le portera, et non l'inverse.
+    - titre: "La confection"
+      texte: >-
+        L'assemblage se fait pièce par pièce, à la machine ou entièrement à la main selon les étapes.
+        Chaque finition est vérifiée, chaque couture pressée. Une pièce n'est prête que lorsqu'elle
+        est parfaite — même dans les endroits que personne ne verra jamais.

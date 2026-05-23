@@ -1,0 +1,22 @@
+# Contenu de la page Accueil — modifiable via Decap CMS → "Page Accueil"
+
+hero:
+  surtitre: "Artisanat textile · Suisse romande"
+  # Arthur : le titre contient "Tout au Chaud" sans nbsp — ajuster le CSS si
+  # le retour à la ligne entre "au" et "Chaud" pose problème sur certains écrans.
+  titre: "Tout au Chaud"
+  tagline: "Des vêtements faits à la main, pensés pour durer et vous envelopper avec soin."
+  bouton: "Prendre contact"
+
+pieces:
+  titre: "Les pièces"
+  sous_titre: "Chaque création est unique, réalisée à la main avec des matières soigneusement sélectionnées au fil des saisons."
+
+fil_conducteur:
+  titre: "Un fil conducteur"
+  texte: >-
+    Depuis plus de trente ans, Magda coud, tricote et assemble des pièces qui traversent les saisons.
+    Chaque vêtement porte la trace d'un geste réfléchi, d'un choix de matière attentionné,
+    d'un fil tiré avec soin. Ici, rien n'est fait en série. Tout est pensé pour durer.
+  lien_label: "Découvrir son histoire →"
+  image: ""

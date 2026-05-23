@@ -1,0 +1,14 @@
+{
+  "name": "tout-au-chaud",
+  "version": "1.0.0",
+  "description": "Site vitrine Tout au Chaud — Eleventy + Decap CMS",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "js-yaml": "^4.1.0",
+    "markdown-it": "^14.1.0"
+  }
+}

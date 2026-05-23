@@ -1,0 +1,66 @@
+---
+layout: base.njk
+titre: "À propos — Tout au Chaud"
+description: "Découvrez l'histoire de Magda, créatrice de vêtements artisanaux faits main en Suisse romande depuis plus de trente ans."
+pageActuelle: "apropos"
+---
+
+<main>
+
+  {# ── INTRODUCTION DE PAGE ──────────────────────────────────────────── #}
+  <section class="page-intro" aria-labelledby="titre-apropos">
+    <div class="contenu-max">
+      <p class="hero-surtitre">{{ apropos.surtitre }}</p>
+      <h1 id="titre-apropos" class="titre-section">{{ apropos.titre_page }}</h1>
+    </div>
+  </section>
+
+
+  {# ── BIOGRAPHIE ────────────────────────────────────────────────────── #}
+  <section class="biographie" aria-labelledby="titre-bio">
+    <div class="contenu-max biographie-interieur">
+
+      {% if apropos.image_bio %}
+        <img class="bio-image" src="{{ apropos.image_bio }}" alt="Magda dans son atelier">
+      {% else %}
+        <div class="bio-image img-placeholder" aria-hidden="true">
+          <span>Photo&nbsp;: Magda dans son atelier,<br>en train de coudre près d'une fenêtre</span>
+        </div>
+      {% endif %}
+
+      <div class="bio-texte">
+        {# titre_bio contient un <br> pour le saut de ligne — rendu avec | safe #}
+        <h2 id="titre-bio" class="titre-section">{{ apropos.titre_bio | safe }}</h2>
+
+        {# markdownify convertit le Markdown en HTML et ajoute la classe
+           "corps-texte" sur chaque <p> via le renderer configuré dans .eleventy.js #}
+        {{ apropos.biographie | markdownify | safe }}
+
+        <a href="/contact/" class="lien-discret">{{ apropos.lien_bio_label }}</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  {# ── PROCESSUS EN 3 ÉTAPES ─────────────────────────────────────────── #}
+  <section class="processus" aria-labelledby="titre-processus">
+    <div class="contenu-max">
+
+      <h2 id="titre-processus" class="titre-section">{{ apropos.processus.titre }}</h2>
+      <p class="sous-titre-section">{{ apropos.processus.sous_titre }}</p>
+
+      <div class="etapes">
+        {% for etape in apropos.processus.etapes %}
+          <article class="etape">
+            <span class="etape-numero" aria-hidden="true">{{ loop.index | zerofill }}</span>
+            <h3>{{ etape.titre }}</h3>
+            <p>{{ etape.texte }}</p>
+          </article>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+</main>

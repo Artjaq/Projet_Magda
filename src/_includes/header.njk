@@ -1,0 +1,42 @@
+{# En-tête commun à toutes les pages.
+   La variable "pageActuelle" est définie dans le front matter de chaque page
+   ("accueil", "apropos" ou "contact") pour afficher le lien actif. #}
+
+<header class="site-header">
+  <div class="header-inner">
+
+    <a href="/" class="logo" aria-label="{{ site.nom }} — retour à l'accueil">
+      {{ site.nom }}
+    </a>
+
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principale">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-principale" id="nav-principale" aria-label="Navigation principale">
+      <ul>
+        <li>
+          <a href="/"
+            {% if pageActuelle == "accueil" %}class="actif" aria-current="page"{% endif %}>
+            Accueil
+          </a>
+        </li>
+        <li>
+          <a href="/apropos/"
+            {% if pageActuelle == "apropos" %}class="actif" aria-current="page"{% endif %}>
+            À propos
+          </a>
+        </li>
+        <li>
+          <a href="/contact/"
+            {% if pageActuelle == "contact" %}class="actif" aria-current="page"{% endif %}>
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
