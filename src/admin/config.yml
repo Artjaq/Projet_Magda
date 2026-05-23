@@ -1,0 +1,284 @@
+# Configuration Decap CMS — Tout au Chaud
+# Arthur : pour ajouter une nouvelle collection, duplique un bloc "- name:"
+# et ajuste le nom, le label, le dossier et les champs.
+# Documentation : https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Interface en français
+locale: 'fr'
+
+# Dossier où Decap stocke les images uploadées par Magda
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+# Pas de workflow éditorial : publication directe à chaque sauvegarde.
+# (editorial_workflow non activé = comportement par défaut)
+
+collections:
+
+  # ════════════════════════════════════════════════════════════════════
+  # COLLECTION : PIÈCES
+  # Chaque pièce = un fichier Markdown dans src/pieces/
+  # Magda peut ajouter, modifier et supprimer des pièces.
+  # Pour réorganiser : changer le champ "Ordre d'affichage".
+  # ════════════════════════════════════════════════════════════════════
+  - name: "pieces"
+    label: "Pièces"
+    label_singular: "Pièce"
+    folder: "src/pieces"
+    create: true
+    slug: "{{ordre}}-{{slug}}"
+    sortable_fields: ['ordre', 'titre']
+    summary: "{{ordre}} — {{titre}}"
+    fields:
+      - label: "Titre de la pièce"
+        name: "titre"
+        widget: "string"
+        hint: "Ex : Manteau en laine naturelle"
+        required: true
+
+      - label: "Photo de la pièce"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Privilégier un format vertical (ratio 3:4). La photo sera affichée dans la grille d'accueil."
+        choose_url: false
+
+      - label: "Description (légende sous la photo)"
+        name: "description"
+        widget: "string"
+        hint: "Courte description affichée sous la photo. Ex : Manteau en laine vierge naturelle."
+        required: true
+
+      - label: "Ordre d'affichage"
+        name: "ordre"
+        widget: "number"
+        value_type: "int"
+        min: 1
+        hint: "1 = affiché en premier. Pour réorganiser les pièces, changez ces numéros."
+        required: true
+
+
+  # ════════════════════════════════════════════════════════════════════
+  # COLLECTION : PAGES (fichiers YAML)
+  # Regroupe toutes les pages et les données globales du site.
+  # ════════════════════════════════════════════════════════════════════
+  - name: "pages"
+    label: "Pages et données du site"
+    files:
+
+      # ────────────────────────────────────────────────────────────────
+      # Données globales : logo, footer, email, Instagram
+      # ────────────────────────────────────────────────────────────────
+      - name: "site"
+        label: "Données globales (logo, pied de page, coordonnées)"
+        file: "src/_data/site.yaml"
+        fields:
+          - label: "Nom de la marque (texte du logo)"
+            name: "nom"
+            widget: "string"
+            hint: "Affiché dans l'en-tête et le pied de page de toutes les pages."
+            required: true
+
+          - label: "Slogan (pied de page)"
+            name: "slogan"
+            widget: "string"
+            hint: "Courte phrase affichée sous le logo dans le pied de page."
+
+          - label: "Adresse e-mail de contact"
+            name: "email"
+            widget: "string"
+            hint: "Ex : contact@toutauchaud.ch — apparaît dans le pied de page et la page Contact."
+            required: true
+
+          - label: "Lien Instagram (URL complète)"
+            name: "instagram"
+            widget: "string"
+            hint: "Ex : https://www.instagram.com/toutauchaud"
+
+          - label: "Pseudo Instagram (affiché)"
+            name: "instagram_label"
+            widget: "string"
+            hint: "Ex : @toutauchaud — c'est ce texte qui apparaît sur la page Contact."
+
+
+      # ────────────────────────────────────────────────────────────────
+      # Page Accueil
+      # ────────────────────────────────────────────────────────────────
+      - name: "accueil"
+        label: "Page Accueil"
+        file: "src/_data/accueil.yaml"
+        fields:
+          - label: "Bloc Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Surtitre (petite ligne au-dessus du titre)"
+                name: "surtitre"
+                widget: "string"
+                hint: "Ex : Artisanat textile · Suisse romande"
+
+              - label: "Titre principal"
+                name: "titre"
+                widget: "string"
+                required: true
+
+              - label: "Phrase d'accroche"
+                name: "tagline"
+                widget: "text"
+                hint: "Une ou deux phrases sous le titre principal."
+
+              - label: "Libellé du bouton"
+                name: "bouton"
+                widget: "string"
+                hint: "Ex : Prendre contact"
+
+          - label: "Section « Les pièces »"
+            name: "pieces"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Titre de la section"
+                name: "titre"
+                widget: "string"
+
+              - label: "Sous-titre de la section"
+                name: "sous_titre"
+                widget: "text"
+
+          - label: "Section « Un fil conducteur »"
+            name: "fil_conducteur"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Titre de la section"
+                name: "titre"
+                widget: "string"
+
+              - label: "Paragraphe de présentation"
+                name: "texte"
+                widget: "text"
+
+              - label: "Libellé du lien vers À propos"
+                name: "lien_label"
+                widget: "string"
+                hint: "Ex : Découvrir son histoire →"
+
+              - label: "Photo de la section (optionnelle)"
+                name: "image"
+                widget: "image"
+                required: false
+                hint: "Photo affichée à droite du texte (ratio 4:3 recommandé). Si vide, un placeholder coloré est affiché."
+                choose_url: false
+
+
+      # ────────────────────────────────────────────────────────────────
+      # Page À propos
+      # ────────────────────────────────────────────────────────────────
+      - name: "apropos"
+        label: "Page À propos"
+        file: "src/_data/apropos.yaml"
+        fields:
+          - label: "Surtitre"
+            name: "surtitre"
+            widget: "string"
+            hint: "Petite ligne au-dessus du titre de page. Ex : La créatrice"
+
+          - label: "Titre de la page"
+            name: "titre_page"
+            widget: "string"
+            required: true
+
+          - label: "Photo biographie"
+            name: "image_bio"
+            widget: "image"
+            required: false
+            hint: "Photo de Magda dans son atelier (ratio 4:5 recommandé)."
+            choose_url: false
+
+          - label: "Titre biographie"
+            name: "titre_bio"
+            widget: "string"
+            hint: "Arthur peut ajouter <br> pour un saut de ligne si besoin."
+
+          - label: "Texte biographie"
+            name: "biographie"
+            widget: "markdown"
+            hint: "Séparez les paragraphes par une ligne vide. Évitez les titres (##) et les listes."
+            required: true
+
+          - label: "Libellé du lien en bas de biographie"
+            name: "lien_bio_label"
+            widget: "string"
+            hint: "Ex : Contacter Magda →"
+
+          - label: "Section Mon processus"
+            name: "processus"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Titre de la section"
+                name: "titre"
+                widget: "string"
+
+              - label: "Sous-titre de la section"
+                name: "sous_titre"
+                widget: "text"
+
+              - label: "Étapes (exactement 3)"
+                name: "etapes"
+                widget: "list"
+                min: 3
+                max: 3
+                hint: "Il y a toujours exactement 3 étapes. Vous pouvez modifier leurs titres et textes."
+                fields:
+                  - label: "Titre de l'étape"
+                    name: "titre"
+                    widget: "string"
+                    required: true
+
+                  - label: "Texte de l'étape"
+                    name: "texte"
+                    widget: "text"
+                    required: true
+
+
+      # ────────────────────────────────────────────────────────────────
+      # Page Contact
+      # ────────────────────────────────────────────────────────────────
+      - name: "contact"
+        label: "Page Contact"
+        file: "src/_data/contact.yaml"
+        fields:
+          - label: "Surtitre"
+            name: "surtitre"
+            widget: "string"
+            hint: "Ex : Écrire à Magda"
+
+          - label: "Titre principal"
+            name: "titre"
+            widget: "string"
+            required: true
+
+          - label: "Texte d'introduction"
+            name: "intro"
+            widget: "text"
+
+          - label: "Description du compte Instagram"
+            name: "instagram_desc"
+            widget: "text"
+            hint: "Phrase affichée sous le lien Instagram. Ex : Pour suivre les créations en cours."
+
+          - label: "Localisation"
+            name: "localisation"
+            widget: "string"
+            hint: "Ex : Suisse romande"
+
+          - label: "Description de la disponibilité"
+            name: "localisation_desc"
+            widget: "text"
+            hint: "Ex : Les pièces sont disponibles sur commande, en livraison ou à récupérer sur place."

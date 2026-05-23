@@ -1,154 +1,208 @@
 # Tout au Chaud — Site vitrine
 
-Site vitrine pour Magda, créatrice de vêtements artisanaux en Suisse romande.  
-Adresse prévue : **toutauchaud.ch**
+Site vitrine de Magda, créatrice de vêtements faits main en Suisse romande.
+Construit avec **Eleventy** (générateur de site statique) et **Decap CMS** (interface d'édition web).
 
 ---
 
-## Ouvrir le site en local
+## Pour Arthur — Guide technique
 
-Aucune installation requise. Double-cliquez simplement sur `index.html` dans votre explorateur de fichiers — le site s'ouvre dans votre navigateur.
-
-Pour naviguer entre les pages, utilisez les liens du menu comme sur un vrai site.
-
----
-
-## Structure des fichiers
+### Structure du projet
 
 ```
-Projet_Magda/
-├── index.html       → Page d'accueil
-├── apropos.html     → Page "À propos" (histoire de Magda, processus)
-├── contact.html     → Page de contact (formulaire + coordonnées)
-├── styles.css       → Tous les styles visuels du site
-├── scripts.js       → Menu mobile et comportement du formulaire
-└── README.md        → Ce fichier
+src/
+├── _data/          → Fichiers YAML : tout le contenu éditable
+│   ├── site.yaml       Données globales (logo, email, Instagram)
+│   ├── accueil.yaml    Contenu page Accueil
+│   ├── apropos.yaml    Contenu page À propos
+│   └── contact.yaml    Contenu page Contact
+├── _includes/      → Templates partagés
+│   ├── base.njk        Layout de base (head, body, scripts)
+│   ├── header.njk      En-tête + navigation
+│   └── footer.njk      Pied de page
+├── pieces/         → Un fichier .md par pièce de la collection
+├── uploads/        → Images uploadées via Decap CMS
+├── admin/          → Interface Decap CMS
+│   ├── index.html      Page admin
+│   └── config.yml      Collections et champs Decap
+├── styles.css      → CSS identique au site original
+└── scripts.js      → JS identique (menu hamburger)
 ```
 
----
-
-## Comment modifier le contenu
-
-### Changer un texte
-
-Ouvrez le fichier `.html` correspondant avec un éditeur de texte (TextEdit sur Mac, Notepad sur Windows).  
-Les textes à remplacer sont signalés par des commentaires comme :
-
-```html
-<!-- À remplacer par le texte réel -->
-```
-
-Modifiez uniquement ce qui se trouve entre les balises, par exemple entre `<p>` et `</p>`, sans toucher aux balises elles-mêmes.
-
----
-
-### Ajouter une vraie photo
-
-Les blocs d'images sont actuellement des rectangles colorés avec du texte descriptif.  
-Pour les remplacer par de vraies photos :
-
-1. Placez vos photos dans le dossier du projet (ex. `manteau.jpg`)
-2. Dans le fichier HTML, remplacez le bloc :
-   ```html
-   <div class="piece-image img-placeholder" aria-hidden="true">
-     <span>Photo : manteau en laine naturelle</span>
-   </div>
-   ```
-   Par :
-   ```html
-   <img src="manteau.jpg" alt="Manteau en laine naturelle fait main" class="piece-image">
-   ```
-3. Adaptez le texte `alt="..."` pour décrire la photo (utile pour les personnes malvoyantes et Google).
-
----
-
-### Changer l'adresse e-mail
-
-Dans chaque fichier HTML, cherchez :
-```html
-href="mailto:contact@toutauchaud.ch"
-```
-Remplacez `contact@toutauchaud.ch` par la vraie adresse. Il y en a plusieurs occurrences (header, footer, page contact) — pensez à toutes les mettre à jour.
-
----
-
-### Changer le lien Instagram
-
-Cherchez dans les fichiers HTML :
-```html
-href="https://instagram.com"
-```
-Remplacez par l'URL complète du profil Instagram (ex. `https://instagram.com/toutauchaud`).
-
----
-
-### Changer une couleur
-
-Ouvrez `styles.css`. Toutes les couleurs sont regroupées en haut du fichier, dans la section `:root` :
-
-```css
-:root {
-  --fond:          #F4EFE6;   /* Fond crème principal */
-  --sable:         #EAE2D6;   /* Fond des sections alternées */
-  --texte:         #2A2420;   /* Couleur du texte */
-  --texte-doux:    #7A6E68;   /* Texte secondaire, labels */
-  --accent:        #B0583A;   /* Terre cuite — boutons, liens */
-  --accent-clair:  #C97A58;   /* Terre cuite claire — survol */
-}
-```
-
-Changez le code hexadécimal (`#B0583A` etc.) pour modifier la couleur sur tout le site d'un seul coup.
-
----
-
-## Brancher le formulaire de contact
-
-Le formulaire est prêt à recevoir les messages — il lui manque juste une destination.
-
-### Option 1 — Formspree (recommandé, gratuit jusqu'à 50 messages/mois)
-
-1. Créez un compte gratuit sur [formspree.io](https://formspree.io)
-2. Créez un nouveau formulaire et copiez votre URL (format `https://formspree.io/f/XXXXXXXX`)
-3. Dans `contact.html`, remplacez la ligne :
-   ```html
-   action="#"
-   ```
-   Par :
-   ```html
-   action="https://formspree.io/f/XXXXXXXX"
-   ```
-4. Supprimez également l'attribut `onsubmit="gererEnvoi(event)"` sur la balise `<form>` et le bloc `<script>` en bas de la page — Formspree gère la confirmation lui-même.
-
-### Option 2 — Firebase Function
-
-Renseignez l'URL de votre fonction à la place de `action="#"`, de la même façon qu'avec Formspree.
-
----
-
-## Déploiement sur Firebase Hosting
-
-Le site est prêt pour Firebase Hosting. Aucun build nécessaire.
+### Installation locale
 
 ```bash
-# Installer Firebase CLI si ce n'est pas déjà fait
-npm install -g firebase-tools
-
-# Se connecter
-firebase login
-
-# Initialiser le projet (choisir "Hosting", pointer vers le dossier courant)
-firebase init hosting
-
-# Déployer
-firebase deploy
+# Cloner le dépôt puis :
+npm install
+npm run dev
+# → Site disponible sur http://localhost:8080
 ```
 
-Lors de l'initialisation, Firebase demande quel dossier contient le site : répondez `.` (point) pour le dossier courant.
+### Build de production
+
+```bash
+npm run build
+# → Fichiers générés dans _site/
+```
+
+### Déploiement sur Netlify
+
+**Étape 1 — Connecter le dépôt**
+- Va sur [netlify.com](https://netlify.com) → "Add new site" → "Import an existing project"
+- Sélectionne le dépôt GitHub
+- Netlify lit automatiquement `netlify.toml` : commande `npm run build`, dossier de publication `_site`
+- Lance le premier déploiement
+
+**Étape 2 — Activer Netlify Identity**
+- Dashboard du site → "Site settings" → "Identity" → **Enable Identity**
+- Dans "Registration preferences" → sélectionne **Invite only**
+  *(seule Magda peut se connecter, pas n'importe qui)*
+
+**Étape 3 — Activer Git Gateway**
+- Toujours dans "Identity" → "Services" → **Enable Git Gateway**
+- Cela permet à Decap CMS de committer directement sur GitHub au nom de Magda
+
+**Étape 4 — Inviter Magda**
+- "Identity" → "Invite users" → entre l'adresse email de Magda
+- Elle reçoit un email avec un lien pour définir son mot de passe
+- Elle accède ensuite à `toutauchaudme.ch/admin`
+
+### Ajouter un nouveau champ éditable
+
+1. Ouvre [src/admin/config.yml](src/admin/config.yml)
+2. Trouve la collection ou le fichier concerné (cherche le `label` en français)
+3. Ajoute un bloc dans la liste `fields:` :
+   ```yaml
+   - label: "Nom affiché dans l'interface"
+     name: "cle_dans_le_yaml"
+     widget: "string"   # ou : text, markdown, image, number…
+     hint: "Explication pour Magda"
+     required: false
+   ```
+4. Ajoute la même clé dans le fichier YAML correspondant (`src/_data/xxx.yaml`)
+5. Utilise la variable dans le template Nunjucks : `{{ accueil.nouvelle_cle }}`
+
+Widgets disponibles : `string`, `text`, `markdown`, `image`, `number`, `boolean`, `list`, `object`.  
+Référence complète : https://decapcms.org/docs/widgets/
+
+### Ajouter une nouvelle collection de pièces
+
+Dans [.eleventy.js](.eleventy.js), duplique le bloc `addCollection` :
+```js
+eleventyConfig.addCollection("nomCollection", function (collectionApi) {
+  return collectionApi
+    .getFilteredByGlob("src/nomCollection/*.md")
+    .sort((a, b) => (a.data.ordre || 0) - (b.data.ordre || 0));
+});
+```
+Puis ajoute la collection dans `src/admin/config.yml` en suivant le modèle existant.
+
+### Mettre à jour Decap CMS
+
+Dans [src/admin/index.html](src/admin/index.html), remplace le numéro de version :
+```html
+<script src="https://unpkg.com/decap-cms@^3.X.X/dist/decap-cms.js"></script>
+```
+Dernières versions : https://github.com/decaporg/decap-cms/releases
+
+### Brancher le formulaire de contact
+
+Le formulaire est actuellement en mode "démo" (affiche un message de confirmation sans envoyer).
+
+**Option recommandée — Formspree** (gratuit jusqu'à 50 messages/mois) :
+1. Crée un compte sur https://formspree.io et copie ton URL de formulaire
+2. Dans [src/contact.njk](src/contact.njk), remplace `action="#"` par `action="https://formspree.io/f/XXXXXXXX"`
+3. Supprime l'attribut `onsubmit="gererEnvoi(event)"` sur `<form>` et le bloc `<script>` en bas du fichier
 
 ---
 
-## Crédits
+## Pour Magda — Guide d'édition
 
-Site conçu et développé pour Magda — Tout au Chaud, Suisse romande.  
-HTML / CSS / JavaScript vanilla, sans dépendances.  
-Polices : [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) et [Inter](https://fonts.google.com/specimen/Inter) via Google Fonts.
+### Comment accéder à l'interface d'administration
+
+1. Ouvre ton navigateur (Safari, Chrome ou Firefox)
+2. Va à l'adresse : **toutauchaudme.ch/admin**
+3. Connecte-toi avec ton adresse email et ton mot de passe
+
+> Si c'est ta première connexion, tu as reçu un email d'invitation d'Arthur.
+> Clique sur le lien dans cet email pour définir ton mot de passe.
+
+---
+
+### Comment modifier un texte du site
+
+1. Dans l'admin, clique sur **"Pages et données du site"** dans le menu de gauche
+2. Choisis la page à modifier (ex. : "Page Accueil")
+3. Clique sur le champ à changer et tape ton nouveau texte
+4. Quand tu as fini, clique sur **"Enregistrer"** en haut à droite
+5. Le site se met à jour automatiquement en quelques minutes
+
+---
+
+### Comment ajouter une nouvelle pièce
+
+1. Dans l'admin, clique sur **"Pièces"** dans le menu de gauche
+2. Clique sur **"Nouvelle Pièce"** (bouton en haut à droite)
+3. Remplis les champs :
+   - **Titre de la pièce** : ex. "Veste en lin naturel"
+   - **Photo de la pièce** : clique sur le champ, puis sur "Upload" pour envoyer ta photo depuis ton ordinateur
+   - **Description** : une courte légende pour la photo
+   - **Ordre d'affichage** : un numéro (1 = en premier sur le site, 2 = deuxième, etc.)
+4. Clique sur **"Enregistrer"**
+
+> La photo sera affichée dans la grille sur la page d'accueil.
+> Si tu n'as pas encore de photo, laisse le champ vide — un espace coloré sera affiché à la place.
+
+---
+
+### Comment modifier une pièce existante
+
+1. Dans l'admin, clique sur **"Pièces"**
+2. Dans la liste, clique sur la pièce à modifier
+3. Change ce que tu veux (titre, photo, description)
+4. Clique sur **"Enregistrer"**
+
+---
+
+### Comment supprimer une pièce
+
+1. Dans l'admin, clique sur **"Pièces"**
+2. Dans la liste, clique sur la pièce à supprimer
+3. Clique sur les **trois petits points** (⋮) en haut à droite
+4. Choisis **"Supprimer"**
+
+> La suppression est définitive. En cas d'erreur, contacte Arthur.
+
+---
+
+### Comment changer l'ordre des pièces
+
+Les pièces sont affichées sur le site dans l'ordre croissant de leur numéro "Ordre d'affichage".
+
+**Exemple :** pour afficher le châle en premier :
+1. Ouvre la fiche du châle → change son ordre à **1** → Enregistrer
+2. Ouvre la fiche du manteau → change son ordre à **2** → Enregistrer
+3. Continue pour toutes les pièces
+
+---
+
+### Comment changer ta photo biographique (page À propos)
+
+1. Clique sur **"Pages et données du site"** → **"Page À propos"**
+2. Clique sur le champ **"Photo biographie"**
+3. Clique sur **"Upload"** et choisis ta nouvelle photo
+4. Clique sur **"Enregistrer"**
+
+---
+
+### Ce qu'il ne faut pas modifier
+
+- **Le formulaire de contact** (les champs Prénom, Nom, Email, Message) — c'est du code, pas du contenu.
+- **La structure générale** du site : en-tête, navigation, pied de page.
+- **Le titre biographique** s'il contient `<br>` — demande à Arthur si tu veux le changer.
+
+En cas de doute, contacte Arthur avant de faire une modification.
+
+---
+
+*Site développé par Arthur Jaquier. Propulsé par [Eleventy](https://www.11ty.dev) et [Decap CMS](https://decapcms.org).*

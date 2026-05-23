@@ -1,0 +1,8 @@
+# Données globales du site — modifiables via Decap CMS → "Données globales"
+# Ces valeurs apparaissent dans l'en-tête, le pied de page et la page contact.
+
+nom: "Tout au Chaud"
+slogan: "Vêtements faits main en Suisse romande"
+email: "contact@toutauchaud.ch"
+instagram: "https://www.instagram.com/toutauchaud"
+instagram_label: "@toutauchaud"

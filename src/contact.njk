@@ -1,0 +1,141 @@
+---
+layout: base.njk
+titre: "Contact — Tout au Chaud"
+description: "Contactez Magda pour une commande, une pièce sur mesure ou toute question sur ses créations artisanales."
+pageActuelle: "contact"
+---
+
+<main>
+
+  {# ── INTRODUCTION ──────────────────────────────────────────────────── #}
+  <section class="contact-intro" aria-labelledby="titre-contact">
+    <div class="contenu-max">
+      <p class="hero-surtitre">{{ contact.surtitre }}</p>
+      <h1 id="titre-contact" class="titre-section">{{ contact.titre }}</h1>
+      <p>{{ contact.intro }}</p>
+    </div>
+  </section>
+
+
+  {# ── FORMULAIRE + INFOS DE CONTACT ────────────────────────────────── #}
+  <section class="contact-grille" aria-label="Formulaire de contact et coordonnées">
+
+    {# FORMULAIRE ──────────────────────────────────────────────────────
+       Pour brancher sur Formspree :
+         1. Créez un compte sur https://formspree.io
+         2. Remplacez l'attribut action par votre URL Formspree
+            (format : https://formspree.io/f/XXXXXXXX)
+         3. Supprimez l'attribut onsubmit et le <p> de confirmation
+       Pour brancher sur une Firebase Function :
+         1. Déployez votre fonction et récupérez son URL HTTPS
+         2. Remplacez l'attribut action par cette URL
+    ─────────────────────────────────────────────────────────────────── #}
+    <form
+      class="formulaire-contact"
+      action="#"
+      method="POST"
+      onsubmit="gererEnvoi(event)"
+      novalidate
+      aria-label="Formulaire de contact"
+    >
+
+      <div class="champs-nom">
+        <div class="champ">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" name="prenom"
+                 autocomplete="given-name" required aria-required="true">
+        </div>
+        <div class="champ">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom"
+                 autocomplete="family-name" required aria-required="true">
+        </div>
+      </div>
+
+      <div class="champ">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email"
+               autocomplete="email" required aria-required="true">
+      </div>
+
+      <div class="champ champ-optionnel">
+        <label for="telephone">Téléphone</label>
+        <input type="tel" id="telephone" name="telephone"
+               autocomplete="tel" placeholder="+41 79 000 00 00">
+      </div>
+
+      <div class="champ">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6"
+                  required aria-required="true"
+                  placeholder="Décrivez votre projet, votre demande ou posez simplement votre question…"></textarea>
+      </div>
+
+      <button type="submit" class="bouton-principal">Envoyer le message</button>
+
+      <p class="confirmation-envoi" id="confirmation-envoi"
+         role="status" aria-live="polite" hidden>
+        Merci pour votre message — Magda vous répondra dans les meilleurs délais.
+      </p>
+
+    </form>
+
+
+    {# INFORMATIONS DE CONTACT ────────────────────────────────────────
+       Email et Instagram viennent de site.yaml.
+       Le reste (instagram_desc, localisation) vient de contact.yaml. #}
+    <aside class="contact-infos" aria-label="Coordonnées">
+
+      <div class="info-bloc">
+        <h3>Par e-mail</h3>
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      </div>
+
+      <div class="info-bloc">
+        <h3>Sur Instagram</h3>
+        <a href="{{ site.instagram }}" target="_blank" rel="noopener noreferrer">
+          {{ site.instagram_label }}
+        </a>
+        <p>{{ contact.instagram_desc }}</p>
+      </div>
+
+      <div class="info-bloc">
+        <h3>Basée en</h3>
+        <p>{{ contact.localisation }}</p>
+        <p>{{ contact.localisation_desc }}</p>
+      </div>
+
+    </aside>
+
+  </section>
+
+</main>
+
+<script>
+  /* Gestion de l'envoi du formulaire (version locale).
+     Arthur : supprimer ou remplacer ce bloc une fois Formspree ou
+     la Firebase Function branchés. */
+  function gererEnvoi(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const confirmation = document.getElementById("confirmation-envoi");
+
+    const champs = form.querySelectorAll("[required]");
+    let valide = true;
+
+    champs.forEach(function (champ) {
+      if (!champ.value.trim()) {
+        champ.style.borderColor = "var(--accent)";
+        valide = false;
+      } else {
+        champ.style.borderColor = "";
+      }
+    });
+
+    if (!valide) return;
+
+    form.querySelector("button[type='submit']").hidden = true;
+    confirmation.hidden = false;
+  }
+</script>
