@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos — Tout au Chaud</title>
+  <meta name="description" content="Découvrez l'histoire de Magda, créatrice de vêtements artisanaux faits main en Suisse romande depuis plus de trente ans.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================================================
+       EN-TÊTE — identique dans toutes les pages
+       Seul changement : la classe "actif" sur le bon lien
+       =================================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="index.html" class="logo" aria-label="Tout au Chaud — retour à l'accueil">
+        Tout au Chaud
+      </a>
+
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principale">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-principale" id="nav-principale" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="apropos.html" class="actif" aria-current="page">À propos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- ===== FIN EN-TÊTE ===== -->
+
+
+  <main>
+
+    <!-- ===================================================
+         INTRODUCTION DE PAGE
+         =================================================== -->
+    <section class="page-intro" aria-labelledby="titre-apropos">
+      <div class="contenu-max">
+        <p class="hero-surtitre">La créatrice</p>
+        <h1 id="titre-apropos" class="titre-section">L'atelier de Magda</h1>
+      </div>
+    </section>
+
+
+    <!-- ===================================================
+         BIOGRAPHIE
+         Image à gauche / texte à droite (desktop),
+         empilés sur mobile — image d'abord.
+         Remplacer le .img-placeholder par une vraie <img>
+         avec un attribut alt descriptif le moment venu.
+         =================================================== -->
+    <section class="biographie" aria-labelledby="titre-bio">
+      <div class="contenu-max biographie-interieur">
+
+        <div class="bio-image img-placeholder" aria-hidden="true">
+          <span>Photo&nbsp;: Magda dans son atelier,<br>en train de coudre près d'une fenêtre</span>
+        </div>
+
+        <div class="bio-texte">
+          <h2 id="titre-bio" class="titre-section">Trente ans<br>de fil en aiguille</h2>
+
+          <!-- À remplacer par le vrai texte de Magda -->
+          <p class="corps-texte">
+            Tout a commencé avec une machine à coudre héritée de sa grand-mère et une armoire pleine de coupons de tissu.
+            Magda a appris en observant, en défaisant, en recommençant — jusqu'à ce que les gestes deviennent naturels,
+            presque instinctifs. Depuis lors, l'atelier n'a jamais cessé de bourdonner.
+          </p>
+
+          <p class="corps-texte">
+            Installée en Suisse romande depuis toujours, elle puise son inspiration dans les paysages qui l'entourent :
+            la laine couleur de sous-bois en automne, le lin ivoire des brumes matinales, les textures rugueuses
+            des montagnes. Chaque pièce est une réponse à une saison, à une humeur, à une envie de matière.
+          </p>
+
+          <p class="corps-texte">
+            Ce qui distingue le travail de Magda, c'est l'attention portée à chaque détail invisible :
+            la couture intérieure aussi soignée que l'extérieur, le choix d'un bouton assorti au grain du tissu,
+            l'ourlet qui tombe juste. Des petits riens qui font qu'un vêtement se porte pendant des années,
+            et qu'on ne se résout jamais vraiment à s'en séparer.
+          </p>
+
+          <a href="contact.html" class="lien-discret">Contacter Magda →</a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===================================================
+         MON PROCESSUS — 3 étapes
+         =================================================== -->
+    <section class="processus" aria-labelledby="titre-processus">
+      <div class="contenu-max">
+
+        <h2 id="titre-processus" class="titre-section">Mon processus</h2>
+        <p class="sous-titre-section">
+          De la pelote au vêtement, chaque étape est réalisée à la main, sans précipitation.
+        </p>
+
+        <div class="etapes">
+
+          <article class="etape">
+            <span class="etape-numero" aria-hidden="true">01</span>
+            <h3>Les matières</h3>
+            <p>
+              <!-- À remplacer par le texte réel -->
+              Tout commence par le choix du fil ou du tissu. Magda privilégie les matières naturelles —
+              laine vierge, alpaga, lin, coton biologique — sélectionnées auprès de petits fournisseurs
+              ou chinées dans des marchés spécialisés. La main du tissu, c'est le premier critère.
+            </p>
+          </article>
+
+          <article class="etape">
+            <span class="etape-numero" aria-hidden="true">02</span>
+            <h3>La conception</h3>
+            <p>
+              <!-- À remplacer par le texte réel -->
+              Avant de couper la moindre pièce, Magda dessine, ajuste, froisse et recommence.
+              Ses patrons naissent sur papier, souvent inspirés de formes anciennes revisitées.
+              Elle pense chaque vêtement pour qu'il s'adapte au corps qui le portera,
+              et non l'inverse.
+            </p>
+          </article>
+
+          <article class="etape">
+            <span class="etape-numero" aria-hidden="true">03</span>
+            <h3>La confection</h3>
+            <p>
+              <!-- À remplacer par le texte réel -->
+              L'assemblage se fait pièce par pièce, à la machine ou entièrement à la main selon les étapes.
+              Chaque finition est vérifiée, chaque couture pressée. Une pièce n'est prête que lorsqu'elle
+              est parfaite — même dans les endroits que personne ne verra jamais.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===================================================
+       PIED DE PAGE — identique dans toutes les pages
+       =================================================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-marque">
+        <a href="index.html" class="logo">Tout au Chaud</a>
+        <p class="footer-slogan">Vêtements faits main en Suisse romande</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navigation secondaire">
+        <a href="index.html">Accueil</a>
+        <a href="apropos.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-contact">
+        <!-- Remplacer par l'adresse email réelle de Magda -->
+        <a href="mailto:contact@toutauchaud.ch">contact@toutauchaud.ch</a>
+        <!-- Remplacer par le lien Instagram réel de Magda -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+
+    </div>
+    <p class="footer-copyright">© 2025 Tout au Chaud — Tous droits réservés</p>
+  </footer>
+  <!-- ===== FIN PIED DE PAGE ===== -->
+
+
+  <script src="scripts.js"></script>
+</body>
+</html>

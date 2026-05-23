@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tout au Chaud — Vêtements faits main en Suisse romande</title>
+  <meta name="description" content="Vêtements artisanaux faits à la main par Magda, en Suisse romande. Pièces uniques, matières naturelles, savoir-faire transmis.">
+
+  <!-- Polices Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================================================
+       EN-TÊTE — copier identique dans toutes les pages
+       Modifier le lien "actif" selon la page courante
+       =================================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="index.html" class="logo" aria-label="Tout au Chaud — retour à l'accueil">
+        Tout au Chaud
+      </a>
+
+      <!-- Bouton hamburger — visible sur mobile uniquement -->
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principale">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-principale" id="nav-principale" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html" class="actif" aria-current="page">Accueil</a></li>
+          <li><a href="apropos.html">À propos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- ===== FIN EN-TÊTE ===== -->
+
+
+  <main>
+
+    <!-- ===================================================
+         HERO
+         Grande image à gauche / texte à droite (desktop),
+         empilés sur mobile.
+         =================================================== -->
+    <section class="hero" aria-label="Présentation de la marque">
+
+      <div class="hero-contenu">
+        <p class="hero-surtitre">Artisanat textile · Suisse romande</p>
+        <h1 class="hero-titre">Tout au&nbsp;Chaud</h1>
+        <p class="hero-tagline">
+          Des vêtements faits à la main, pensés pour durer et vous envelopper avec soin.
+        </p>
+        <a href="contact.html" class="bouton-principal">Prendre contact</a>
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         SECTION DÉCOUVRIR
+         Grille de pièces — remplacer les .img-placeholder
+         par de vraies balises <img> le moment venu.
+         =================================================== -->
+    <section class="decouvrir" aria-labelledby="titre-decouvrir">
+      <div class="contenu-max">
+
+        <h2 id="titre-decouvrir" class="titre-section">Les pièces</h2>
+        <p class="sous-titre-section">
+          Chaque création est unique, réalisée à la main avec des matières soigneusement sélectionnées au fil des saisons.
+        </p>
+
+        <div class="grille-pieces">
+
+          <figure class="piece-carte">
+            <div class="piece-image img-placeholder" aria-hidden="true">
+              <span>Photo&nbsp;: manteau<br>en laine naturelle</span>
+            </div>
+            <figcaption class="piece-legende">Manteau en laine naturelle</figcaption>
+          </figure>
+
+          <figure class="piece-carte">
+            <div class="piece-image img-placeholder" aria-hidden="true">
+              <span>Photo&nbsp;: pull<br>à torsades fait main</span>
+            </div>
+            <figcaption class="piece-legende">Pull à torsades</figcaption>
+          </figure>
+
+          <figure class="piece-carte">
+            <div class="piece-image img-placeholder" aria-hidden="true">
+              <span>Photo&nbsp;: veste<br>en tweed artisanal</span>
+            </div>
+            <figcaption class="piece-legende">Veste en tweed</figcaption>
+          </figure>
+
+          <figure class="piece-carte">
+            <div class="piece-image img-placeholder" aria-hidden="true">
+              <span>Photo&nbsp;: châle<br>tissé à la main</span>
+            </div>
+            <figcaption class="piece-legende">Châle tissé</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================
+         PRÉSENTATION COURTE
+         Texte à gauche, visuel à droite (desktop).
+         Lien vers la page À propos.
+         =================================================== -->
+    <section class="presentation" aria-labelledby="titre-presentation">
+      <div class="contenu-max presentation-interieur">
+
+        <div class="presentation-texte">
+          <h2 id="titre-presentation" class="titre-section">Un fil conducteur</h2>
+          <p class="corps-texte">
+            Depuis plus de trente ans, Magda coud, tricote et assemble des pièces qui traversent les saisons.
+            Chaque vêtement porte la trace d'un geste réfléchi, d'un choix de matière attentionné,
+            d'un fil tiré avec soin. Ici, rien n'est fait en série. Tout est pensé pour durer.
+          </p>
+          <a href="apropos.html" class="lien-discret">Découvrir son histoire →</a>
+        </div>
+
+        <div class="presentation-visuel img-placeholder" aria-hidden="true">
+          <span>Photo&nbsp;: détail d'une couture<br>réalisée à la main</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===================================================
+       PIED DE PAGE — copier identique dans toutes les pages
+       =================================================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-marque">
+        <!-- Remplacer par le vrai logo SVG si disponible -->
+        <a href="index.html" class="logo">Tout au Chaud</a>
+        <p class="footer-slogan">Vêtements faits main en Suisse romande</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navigation secondaire">
+        <a href="index.html">Accueil</a>
+        <a href="apropos.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-contact">
+        <!-- Remplacer par l'adresse email réelle de Magda -->
+        <a href="mailto:contact@toutauchaud.ch">contact@toutauchaud.ch</a>
+        <!-- Remplacer par le lien Instagram réel de Magda -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+
+    </div>
+    <p class="footer-copyright">© 2025 Tout au Chaud — Tous droits réservés</p>
+  </footer>
+  <!-- ===== FIN PIED DE PAGE ===== -->
+
+
+  <script src="scripts.js"></script>
+</body>
+</html>

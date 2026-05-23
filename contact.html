@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Tout au Chaud</title>
+  <meta name="description" content="Contactez Magda pour une commande, une pièce sur mesure ou toute question sur ses créations artisanales.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================================================
+       EN-TÊTE — identique dans toutes les pages
+       Seul changement : la classe "actif" sur le bon lien
+       =================================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="index.html" class="logo" aria-label="Tout au Chaud — retour à l'accueil">
+        Tout au Chaud
+      </a>
+
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principale">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-principale" id="nav-principale" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="apropos.html">À propos</a></li>
+          <li><a href="contact.html" class="actif" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- ===== FIN EN-TÊTE ===== -->
+
+
+  <main>
+
+    <!-- ===================================================
+         INTRODUCTION
+         =================================================== -->
+    <section class="contact-intro" aria-labelledby="titre-contact">
+      <div class="contenu-max">
+        <p class="hero-surtitre">Écrire à Magda</p>
+        <h1 id="titre-contact" class="titre-section">Parlons de votre projet</h1>
+        <p>
+          Vous avez une envie de pièce sur mesure, une question sur les créations disponibles,
+          ou simplement l'envie d'échanger ? Magda vous répond personnellement, avec plaisir.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ===================================================
+         FORMULAIRE + INFOS DE CONTACT
+         =================================================== -->
+    <section class="contact-grille" aria-label="Formulaire de contact et coordonnées">
+
+      <!-- FORMULAIRE ————————————————————————————————————
+           Pour brancher sur Formspree :
+             1. Créez un compte sur https://formspree.io
+             2. Remplacez l'attribut action ci-dessous par votre URL Formspree
+                (format : https://formspree.io/f/XXXXXXXX)
+             3. Supprimez l'attribut onsubmit et le <p> de confirmation si vous utilisez Formspree
+           Pour brancher sur une Firebase Function :
+             1. Déployez votre fonction et récupérez son URL HTTPS
+             2. Remplacez l'attribut action par cette URL
+             3. Passez method="POST" (déjà en place)
+           ================================================= -->
+      <form
+        class="formulaire-contact"
+        action="#"
+        method="POST"
+        onsubmit="gererEnvoi(event)"
+        novalidate
+        aria-label="Formulaire de contact"
+      >
+
+        <div class="champs-nom">
+          <div class="champ">
+            <label for="prenom">Prénom</label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              autocomplete="given-name"
+              required
+              aria-required="true"
+            >
+          </div>
+          <div class="champ">
+            <label for="nom">Nom</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              autocomplete="family-name"
+              required
+              aria-required="true"
+            >
+          </div>
+        </div>
+
+        <div class="champ">
+          <label for="email">Adresse e-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+            aria-required="true"
+          >
+        </div>
+
+        <div class="champ champ-optionnel">
+          <label for="telephone">Téléphone</label>
+          <input
+            type="tel"
+            id="telephone"
+            name="telephone"
+            autocomplete="tel"
+            placeholder="+41 79 000 00 00"
+          >
+        </div>
+
+        <div class="champ">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            aria-required="true"
+            placeholder="Décrivez votre projet, votre demande ou posez simplement votre question…"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="bouton-principal">Envoyer le message</button>
+
+        <!-- Message de confirmation affiché après envoi (géré par JS) -->
+        <p class="confirmation-envoi" id="confirmation-envoi" role="status" aria-live="polite" hidden>
+          Merci pour votre message — Magda vous répondra dans les meilleurs délais.
+        </p>
+
+      </form>
+
+
+      <!-- INFORMATIONS DE CONTACT ———————————————————— -->
+      <aside class="contact-infos" aria-label="Coordonnées">
+
+        <div class="info-bloc">
+          <h3>Par e-mail</h3>
+          <!-- Remplacer par l'adresse email réelle de Magda -->
+          <a href="mailto:contact@toutauchaud.ch">contact@toutauchaud.ch</a>
+        </div>
+
+        <div class="info-bloc">
+          <h3>Sur Instagram</h3>
+          <!-- Remplacer par le lien Instagram réel de Magda -->
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">@toutauchaud</a>
+          <p>Pour suivre les créations en cours et les nouvelles pièces disponibles.</p>
+        </div>
+
+        <div class="info-bloc">
+          <h3>Basée en</h3>
+          <p>Suisse romande</p>
+          <p>Les pièces sont disponibles sur commande, en livraison ou à récupérer sur place.</p>
+        </div>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+
+  <!-- ===================================================
+       PIED DE PAGE — identique dans toutes les pages
+       =================================================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-marque">
+        <a href="index.html" class="logo">Tout au Chaud</a>
+        <p class="footer-slogan">Vêtements faits main en Suisse romande</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navigation secondaire">
+        <a href="index.html">Accueil</a>
+        <a href="apropos.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-contact">
+        <!-- Remplacer par l'adresse email réelle de Magda -->
+        <a href="mailto:contact@toutauchaud.ch">contact@toutauchaud.ch</a>
+        <!-- Remplacer par le lien Instagram réel de Magda -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+
+    </div>
+    <p class="footer-copyright">© 2025 Tout au Chaud — Tous droits réservés</p>
+  </footer>
+  <!-- ===== FIN PIED DE PAGE ===== -->
+
+
+  <script src="scripts.js"></script>
+  <script>
+    /* ===================================================
+       Gestion de l'envoi du formulaire (version locale)
+       Ce bloc sera remplacé ou supprimé une fois Formspree
+       ou la Firebase Function branchés.
+       =================================================== */
+    function gererEnvoi(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const confirmation = document.getElementById('confirmation-envoi');
+
+      /* Validation simple avant affichage du message */
+      const champs = form.querySelectorAll('[required]');
+      let valide = true;
+
+      champs.forEach((champ) => {
+        if (!champ.value.trim()) {
+          champ.style.borderColor = 'var(--accent)';
+          valide = false;
+        } else {
+          champ.style.borderColor = '';
+        }
+      });
+
+      if (!valide) return;
+
+      /* Afficher la confirmation, masquer le bouton */
+      form.querySelector('button[type="submit"]').hidden = true;
+      confirmation.hidden = false;
+    }
+  </script>
+</body>
+</html>
