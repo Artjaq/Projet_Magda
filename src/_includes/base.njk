@@ -22,20 +22,5 @@
 
   <script src="/scripts.js"></script>
 
-  {# Widget Netlify Identity : intercepte le token dans l'URL lors de la
-     confirmation d'email de Magda au premier accès à l'admin. #}
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", function (user) {
-        if (!user) {
-          window.netlifyIdentity.on("login", function () {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
-
 </body>
 </html>
