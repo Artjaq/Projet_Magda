@@ -1,0 +1,36 @@
+---
+layout: base.njk
+---
+{# Eleventy layout chaining (front matter layout:) est utilisé plutôt que
+   {% extends %} car base.njk n'expose pas de blocs Nunjucks — c'est le
+   pattern idiomatique Eleventy v3. #}
+
+<main>
+  <article class="piece-page contenu-max">
+    <a href="/#titre-decouvrir" class="lien-discret piece-retour">← Toutes les pièces</a>
+
+    <div class="piece-corps">
+
+      <div class="piece-media">
+        {% if image %}
+          <img class="piece-page-image" src="{{ image }}" alt="{{ titre }}">
+        {% else %}
+          <div class="piece-page-image img-placeholder" aria-hidden="true">
+            <span>{{ description }}</span>
+          </div>
+        {% endif %}
+        {% if description %}
+          <p class="piece-legende">{{ description }}</p>
+        {% endif %}
+      </div>
+
+      <div class="piece-infos">
+        <h1 class="titre-piece">{{ titre }}</h1>
+        {% if texte %}
+          <p class="corps-texte">{{ texte }}</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </article>
+</main>
