@@ -15,7 +15,45 @@ Site vitrine 3 pages pour Magda, créatrice de vêtements artisanaux en Suisse r
 
 ![Aperçu du site](./docs/screenshot.png)
 
----
+### Déploiement sur Netlify
+
+**Étape 1 — Connecter le dépôt**
+- Va sur [netlify.com](https://netlify.com) → "Add new site" → "Import an existing project"
+- Sélectionne le dépôt GitHub
+- Netlify lit automatiquement `netlify.toml` : commande `npm run build`, dossier de publication `_site`
+- Lance le premier déploiement
+
+**Étape 2 — Activer Netlify Identity**
+- Dashboard du site → "Site settings" → "Identity" → **Enable Identity**
+- Dans "Registration preferences" → sélectionne **Invite only**
+  *(seule Magda peut se connecter, pas n'importe qui)*
+
+**Étape 3 — Activer Git Gateway**
+- Toujours dans "Identity" → "Services" → **Enable Git Gateway**
+- Cela permet à Decap CMS de committer directement sur GitHub au nom de Magda
+
+**Étape 4 — Inviter Magda**
+- "Identity" → "Invite users" → entre l'adresse email de Magda
+- Elle reçoit un email avec un lien pour définir son mot de passe
+- Elle accède ensuite à `toutauchaudme.ch/admin`
+
+### Ajouter un nouveau champ éditable
+
+1. Ouvre [src/admin/config.yml](src/admin/config.yml)
+2. Trouve la collection ou le fichier concerné (cherche le `label` en français)
+3. Ajoute un bloc dans la liste `fields:` :
+   ```yaml
+   - label: "Nom affiché dans l'interface"
+     name: "cle_dans_le_yaml"
+     widget: "string"   # ou : text, markdown, image, number…
+     hint: "Explication pour Magda"
+     required: false
+   ```
+4. Ajoute la même clé dans le fichier YAML correspondant (`src/_data/xxx.yaml`)
+5. Utilise la variable dans le template Nunjucks : `{{ accueil.nouvelle_cle }}`
+
+Widgets disponibles : `string`, `text`, `markdown`, `image`, `number`, `boolean`, `list`, `object`.  
+Référence complète : https://decapcms.org/docs/widgets/
 
 ## Le projet en bref
 
@@ -30,7 +68,7 @@ Site vitrine 3 pages pour Magda, créatrice de vêtements artisanaux en Suisse r
 - Formulaire de contact (prêt à brancher sur Formspree)
 - Navigation responsive avec menu hamburger
 
----
+Le formulaire est actuellement en mode "démo" (affiche un message de confirmation sans envoyer).
 
 ## Stack technique
 
@@ -44,7 +82,7 @@ Site vitrine 3 pages pour Magda, créatrice de vêtements artisanaux en Suisse r
 | **Netlify** | Hébergement + CI/CD | Build déclenché par chaque push, CDN global, tier gratuit suffisant |
 | **CSS / JS vanilla** | Style et interactions | Aucune dépendance, rendu identique au prototype initial |
 
----
+### Comment accéder à l'interface d'administration
 
 ## Décisions & trade-offs
 
