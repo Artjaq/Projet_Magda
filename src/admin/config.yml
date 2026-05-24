@@ -84,6 +84,12 @@ collections:
         hint: "Courte description affichée sous la photo. Ex : Manteau en laine vierge naturelle."
         required: true
 
+      - label: "Texte de présentation"
+        name: "texte"
+        widget: "text"
+        required: false
+        hint: "Texte affiché à côté de la photo sur la page de la pièce. Décrivez la matière, le processus de fabrication, ce qui rend cette pièce unique."
+
       - label: "Ordre d'affichage"
         name: "ordre"
         widget: "number"

@@ -756,3 +756,119 @@ a {
     padding: 6rem 0;
   }
 }
+
+/* ==============================================
+   CAROUSEL — Accueil
+   ============================================== */
+
+/* overflow: hidden sur le conteneur masque les cartes hors-champ */
+.carousel {
+  overflow: hidden;
+}
+
+.carousel-piste {
+  display: flex;
+  gap: 1rem;
+  transition: transform 300ms ease;
+}
+
+/* Mobile : 1 carte visible */
+.carousel-item {
+  flex: 0 0 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Flèches sous la piste, centrées, 44×44 min pour l'accessibilité tactile */
+.carousel-controles {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.carousel-fleche {
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--texte-doux);
+  background: transparent;
+  color: var(--texte-doux);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.carousel-fleche:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (min-width: 768px) {
+  /* Desktop : 3 cartes simultanées — 2 gaps de 1rem entre elles */
+  .carousel-item {
+    flex: 0 0 calc((100% - 2rem) / 3);
+  }
+}
+
+/* ==============================================
+   PAGE PIÈCE DÉDIÉE
+   ============================================== */
+
+.piece-page {
+  padding: 3rem 1.5rem 5rem;
+}
+
+.piece-retour {
+  display: inline-block;
+  margin-bottom: 2.5rem;
+}
+
+/* Mobile : empilé, image en premier */
+.piece-corps {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.piece-page-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+.piece-infos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.titre-piece {
+  font-family: var(--titre);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--texte);
+  margin: 0;
+}
+
+/* Desktop : 2 colonnes, image ~45%, texte ~55% */
+@media (min-width: 768px) {
+  .piece-corps {
+    grid-template-columns: 45fr 55fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .piece-infos {
+    padding-top: 1rem;
+    position: sticky;
+    top: 2rem; /* colle le texte en haut au scroll si image longue */
+  }
+}

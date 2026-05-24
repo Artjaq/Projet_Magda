@@ -33,3 +33,39 @@ if (btnToggle && navPrincipale) {
     }
   });
 }
+
+// ── Carousel ─
+(function () {
+  const carousel = document.querySelector('.carousel');
+  if (!carousel) return;
+
+  const piste = document.getElementById('carousel-piste');
+  const items = Array.from(piste.querySelectorAll('.carousel-item'));
+  const btnPrev = carousel.querySelector('.carousel-fleche--prev');
+  const btnNext = carousel.querySelector('.carousel-fleche--next');
+  const nb = items.length;
+
+  let indexCourant = 0;
+  let timerResize;
+
+  function decalagePiste() {
+    const gap = parseFloat(getComputedStyle(piste).gap) || 0;
+    return items[0].offsetWidth + gap;
+  }
+
+  function allerA(index) {
+    if (index < 0) index = nb - 1;
+    if (index >= nb) index = 0;
+    indexCourant = index;
+    piste.style.transform = `translateX(-${indexCourant * decalagePiste()}px)`;
+  }
+
+  btnNext.addEventListener('click', () => allerA(indexCourant + 1));
+  btnPrev.addEventListener('click', () => allerA(indexCourant - 1));
+
+  /* Debounce maison — recalcule le décalage après redimensionnement */
+  window.addEventListener('resize', () => {
+    clearTimeout(timerResize);
+    timerResize = setTimeout(() => allerA(indexCourant), 150);
+  });
+}());

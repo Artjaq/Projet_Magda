@@ -1,3 +1,4 @@
 {
-  "permalink": false
+  "layout": "piece.njk",
+  "permalink": "/pieces/{{ page.fileSlug }}/"
 }

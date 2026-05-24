@@ -27,19 +27,25 @@ pageActuelle: "accueil"
       <h2 id="titre-decouvrir" class="titre-section">{{ accueil.pieces.titre }}</h2>
       <p class="sous-titre-section">{{ accueil.pieces.sous_titre }}</p>
 
-      <div class="grille-pieces">
-        {% for piece in collections.pieces %}
-          <figure class="piece-carte">
-            {% if piece.data.image %}
-              <img class="piece-image" src="{{ piece.data.image }}" alt="{{ piece.data.titre }}">
-            {% else %}
-              <div class="piece-image img-placeholder" aria-hidden="true">
-                <span>{{ piece.data.description }}</span>
-              </div>
-            {% endif %}
-            <figcaption class="piece-legende">{{ piece.data.titre }}</figcaption>
-          </figure>
-        {% endfor %}
+      <div class="carousel" role="region" aria-label="Pièces de la collection">
+        <div class="carousel-piste" id="carousel-piste">
+          {% for piece in collections.pieces %}
+            <a href="/pieces/{{ piece.fileSlug }}/" class="piece-carte carousel-item">
+              {% if piece.data.image %}
+                <img class="piece-image" src="{{ piece.data.image }}" alt="{{ piece.data.titre }}">
+              {% else %}
+                <div class="piece-image img-placeholder" aria-hidden="true">
+                  <span>{{ piece.data.description }}</span>
+                </div>
+              {% endif %}
+              <span class="piece-legende">{{ piece.data.titre }}</span>
+            </a>
+          {% endfor %}
+        </div>
+        <div class="carousel-controles" aria-label="Navigation du carousel">
+          <button class="carousel-fleche carousel-fleche--prev" aria-label="Pièce précédente">&#8592;</button>
+          <button class="carousel-fleche carousel-fleche--next" aria-label="Pièce suivante">&#8594;</button>
+        </div>
       </div>
 
     </div>
