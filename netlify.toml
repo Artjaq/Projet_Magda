@@ -1,6 +1,5 @@
 # Configuration Netlify — Tout au Chaud
-# Arthur : après le premier déploiement, active Netlify Identity + Git Gateway
-# dans l'interface Netlify (Site settings → Identity, puis Git Gateway).
+# Authentification gérée par DecapBridge (PKCE) — aucune configuration Netlify Identity requise.
 
 [build]
   command   = "npm run build"
@@ -8,10 +7,3 @@
 
 [build.environment]
   NODE_VERSION = "20"
-
-# Netlify Identity : redirige les liens de confirmation d'email vers la racine
-# où le widget identité intercepte le token dans l'URL.
-[[redirects]]
-  from   = "/"
-  to     = "/index.html"
-  status = 200
