@@ -20,24 +20,29 @@ pageActuelle: "contact"
   {# ── FORMULAIRE + INFOS DE CONTACT ────────────────────────────────── #}
   <section class="contact-grille" aria-label="Formulaire de contact et coordonnées">
 
-    {# FORMULAIRE ──────────────────────────────────────────────────────
-       Pour brancher sur Formspree :
-         1. Créez un compte sur https://formspree.io
-         2. Remplacez l'attribut action par votre URL Formspree
-            (format : https://formspree.io/f/XXXXXXXX)
-         3. Supprimez l'attribut onsubmit et le <p> de confirmation
-       Pour brancher sur une Firebase Function :
-         1. Déployez votre fonction et récupérez son URL HTTPS
-         2. Remplacez l'attribut action par cette URL
-    ─────────────────────────────────────────────────────────────────── #}
+    {# Formulaire branché sur Netlify Forms.
+       - L'attribut data-netlify="true" permet à Netlify de détecter le formulaire au build.
+       - Les soumissions arrivent dans le dashboard Netlify (onglet Forms) ET par email
+         à contact@toutauchaudme.ch (configurer la notification dans Netlify).
+       - Le champ "bot-field" est un honeypot anti-spam : si rempli, le message est rejeté.
+       - Quota gratuit Netlify : 100 soumissions/mois (largement suffisant). #}
     <form
       class="formulaire-contact"
+      name="contact"
       action="#"
       method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
       onsubmit="gererEnvoi(event)"
       novalidate
       aria-label="Formulaire de contact"
     >
+
+      <input type="hidden" name="form-name" value="contact">
+
+      <p class="champ-honeypot" hidden aria-hidden="true">
+        <label>Ne pas remplir ce champ : <input name="bot-field"></label>
+      </p>
 
       <div class="champs-nom">
         <div class="champ">
@@ -112,18 +117,18 @@ pageActuelle: "contact"
 </main>
 
 <script>
-  /* Gestion de l'envoi du formulaire (version locale).
-     Arthur : supprimer ou remplacer ce bloc une fois Formspree ou
-     la Firebase Function branchés. */
+  /* Soumission AJAX vers Netlify Forms.
+     Validation côté client + envoi en form-urlencoded vers la page courante.
+     Le formulaire est détecté par Netlify au build grâce à data-netlify="true". */
   function gererEnvoi(e) {
     e.preventDefault();
 
     const form = e.target;
     const confirmation = document.getElementById("confirmation-envoi");
+    const bouton = form.querySelector("button[type='submit']");
 
     const champs = form.querySelectorAll("[required]");
     let valide = true;
-
     champs.forEach(function (champ) {
       if (!champ.value.trim()) {
         champ.style.borderColor = "var(--accent)";
@@ -132,10 +137,31 @@ pageActuelle: "contact"
         champ.style.borderColor = "";
       }
     });
-
     if (!valide) return;
 
-    form.querySelector("button[type='submit']").hidden = true;
-    confirmation.hidden = false;
+    bouton.disabled = true;
+    const texteOrigine = bouton.textContent;
+    bouton.textContent = "Envoi en cours…";
+
+    const donnees = new URLSearchParams(new FormData(form)).toString();
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: donnees
+    })
+      .then(function (reponse) {
+        if (!reponse.ok) throw new Error("Réponse HTTP " + reponse.status);
+        bouton.hidden = true;
+        confirmation.hidden = false;
+      })
+      .catch(function () {
+        bouton.disabled = false;
+        bouton.textContent = texteOrigine;
+        alert(
+          "Une erreur est survenue lors de l'envoi du message. " +
+          "Vous pouvez réessayer ou écrire directement à contact@toutauchaudme.ch."
+        );
+      });
   }
 </script>

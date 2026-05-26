@@ -34,9 +34,8 @@ auth:
 # Logo affiché dans l'interface admin
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
-# Arthur : mettre à jour ces deux URLs quand le domaine toutauchaudme.ch sera branché sur Netlify
-site_url: https://projetmagda.netlify.app
-display_url: https://projetmagda.netlify.app
+site_url: https://toutauchaudme.ch
+display_url: https://toutauchaudme.ch
 
 # Interface en français
 locale: 'fr'
@@ -128,7 +127,7 @@ collections:
           - label: "Adresse e-mail de contact"
             name: "email"
             widget: "string"
-            hint: "Ex : contact@toutauchaud.ch — apparaît dans le pied de page et la page Contact."
+            hint: "Ex : contact@toutauchaudme.ch — apparaît dans le pied de page et la page Contact."
             required: true
 
           - label: "Lien Instagram (URL complète)"
