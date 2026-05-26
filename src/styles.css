@@ -21,8 +21,10 @@
   --accent:          #B0583A;
   --accent-clair:    #C97A58;
 
-  --titre:  'Cormorant Garamond', Georgia, serif;
-  --corps:  'Inter', Arial, sans-serif;
+  /* Test : harmonisation autour de Quicksand pour cohérence avec le logo.
+     L'ancienne combinaison Cormorant Garamond + Inter est en historique git. */
+  --titre: 'Quicksand', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
+  --corps: 'Quicksand', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
 
   --largeur-max: 1200px;
 }
@@ -84,6 +86,7 @@ a {
   font-family: var(--corps);
   font-size: 0.8rem;
   color: var(--texte-doux);
+  /* Quicksand n'a pas d'italique natif : rendu oblique synthétique par le navigateur. */
   font-style: italic;
   line-height: 1.5;
 }
@@ -295,6 +298,7 @@ a {
   font-family: var(--titre);
   font-size: clamp(3.5rem, 12vw, 7rem);
   font-weight: 300;
+  /* Quicksand n'a pas d'italique natif : rendu oblique synthétique par le navigateur. */
   font-style: italic;
   line-height: 1.0;
   color: var(--texte);
@@ -341,6 +345,7 @@ a {
   font-size: 0.85rem;
   color: var(--texte-doux);
   padding: 0.75rem 0 0;
+  /* Quicksand n'a pas d'italique natif : rendu oblique synthétique par le navigateur. */
   font-style: italic;
 }
 
@@ -381,6 +386,7 @@ a {
 }
 
 .page-intro .titre-section {
+  /* Quicksand n'a pas d'italique natif : rendu oblique synthétique par le navigateur. */
   font-style: italic;
 }
 
@@ -526,6 +532,7 @@ a {
 .champ-optionnel label::after {
   content: ' (optionnel)';
   font-weight: 400;
+  /* Quicksand n'a pas d'italique natif : rendu oblique synthétique par le navigateur. */
   font-style: italic;
   text-transform: none;
   letter-spacing: 0;
@@ -571,6 +578,7 @@ a {
   font-size: 1rem;
   color: var(--accent);
   padding: 1rem 0;
+  /* Quicksand n'a pas d'italique natif : rendu oblique synthétique par le navigateur. */
   font-style: italic;
 }
 
@@ -871,7 +879,8 @@ a {
   font-family: var(--titre);
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 300;
-  font-style: italic;
+  /* Quicksand n'a pas d'italique natif : rendu oblique synthétique par le navigateur. */
+  font-style: bold;
   line-height: 1.1;
   color: var(--texte);
   margin: 0;
