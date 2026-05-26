@@ -8,12 +8,26 @@ pageActuelle: "accueil"
 <main>
 
   {# ── HERO ──────────────────────────────────────────────────────────── #}
+  {# Mobile : texte seul empilé. Desktop (≥1024px) : 2 colonnes texte / visuel. #}
   <section class="hero" aria-label="Présentation de la marque">
     <div class="hero-contenu">
-      <p class="hero-surtitre">{{ accueil.hero.surtitre }}</p>
-      <h1 class="hero-titre">{{ accueil.hero.titre }}</h1>
-      <p class="hero-tagline">{{ accueil.hero.tagline }}</p>
-      <a href="/contact/" class="bouton-principal">{{ accueil.hero.bouton }}</a>
+
+      <div class="hero-texte">
+        <p class="hero-surtitre">{{ accueil.hero.surtitre }}</p>
+        <h1 class="hero-titre">{{ accueil.hero.titre }}</h1>
+        <p class="hero-tagline">{{ accueil.hero.tagline }}</p>
+        <a href="/contact/" class="bouton-principal">{{ accueil.hero.bouton }}</a>
+      </div>
+
+      {% if accueil.hero.image %}
+        <div class="hero-visuel">
+          <img class="hero-image" src="{{ accueil.hero.image }}"
+               alt="{{ accueil.hero.image_alt }}" loading="eager">
+        </div>
+      {% else %}
+        <div class="hero-visuel hero-visuel-placeholder" aria-hidden="true"></div>
+      {% endif %}
+
     </div>
   </section>
 

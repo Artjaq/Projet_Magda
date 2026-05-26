@@ -7,6 +7,8 @@ hero:
   titre: "Tout au Chaud"
   tagline: "Des vêtements faits à la main, pensés pour durer et vous envelopper avec soin."
   bouton: "Prendre contact"
+  image: ""
+  image_alt: ""
 
 pieces:
   titre: "Les pièces"
