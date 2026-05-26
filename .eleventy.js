@@ -3,8 +3,18 @@
 
 const markdownIt = require("markdown-it");
 const yaml = require("js-yaml");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = function (eleventyConfig) {
+
+  // ── Shortcode : inline un fichier SVG depuis src/ ────────────────────
+  // Usage dans un template : {% svg "logo/logo-complet.svg" %}
+  // Inliner le SVG (plutôt que <img>) permet à `fill="currentColor"` de fonctionner.
+  eleventyConfig.addShortcode("svg", function (cheminRelatif) {
+    const cheminAbsolu = path.join("src", cheminRelatif);
+    return fs.readFileSync(cheminAbsolu, "utf-8");
+  });
 
   // ── Support des fichiers de données YAML (.yaml et .yml) ─────────────
   // En Eleventy v3, seul .json est chargé par défaut ; il faut déclarer yaml.
@@ -15,6 +25,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/scripts.js");
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/uploads");
+  eleventyConfig.addPassthroughCopy("src/logo");
 
   // ── Filtre : convertit du Markdown en HTML (utilisé pour la biographie)
   // Les <p> reçoivent la classe "corps-texte" pour correspondre au CSS existant.

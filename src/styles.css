@@ -170,7 +170,27 @@ a {
   height: 4rem;
 }
 
-/* Logo / nom de marque */
+/* Logo SVG inline — header */
+.lien-logo {
+  color: var(--texte);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: 2.4rem;
+}
+
+.lien-logo svg {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Surcharge couleur : fond crème sur fond brun foncé du footer */
+.site-footer .lien-logo {
+  color: var(--fond);
+}
+
+/* Logo texte — classe conservée au cas où */
 .logo {
   font-family: var(--titre);
   font-size: 1.6rem;
