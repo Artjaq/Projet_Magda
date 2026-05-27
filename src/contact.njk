@@ -154,7 +154,7 @@ pageActuelle: "contact"
     })
       .then(function (reponse) {
         if (!reponse.ok) throw new Error("Réponse HTTP " + reponse.status);
-        bouton.hidden = true;
+        bouton.style.display = "none";
         confirmation.hidden = false;
       })
       .catch(function () {
