@@ -20,29 +20,26 @@ pageActuelle: "contact"
   {# ── FORMULAIRE + INFOS DE CONTACT ────────────────────────────────── #}
   <section class="contact-grille" aria-label="Formulaire de contact et coordonnées">
 
-    {# Formulaire branché sur Netlify Forms.
-       - L'attribut data-netlify="true" permet à Netlify de détecter le formulaire au build.
-       - Les soumissions arrivent dans le dashboard Netlify (onglet Forms) ET par email
-         à contact@toutauchaudme.ch (configurer la notification dans Netlify).
-       - Le champ "bot-field" est un honeypot anti-spam : si rempli, le message est rejeté.
-       - Quota gratuit Netlify : 100 soumissions/mois (largement suffisant). #}
+    {# Formulaire branché sur Formspree (https://formspree.io/f/mredonbp).
+       - Les soumissions sont envoyées par email à contact@toutauchaudme.ch
+         (destinataire configuré dans le dashboard Formspree).
+       - Quota gratuit Formspree : 50 soumissions/mois.
+       - Anti-spam : champ honeypot _gotcha + filtre Akismet activé dans Formspree.
+       - Pour changer le destinataire ou configurer les notifications :
+         passer par le dashboard Formspree, pas par le code. #}
     <form
       class="formulaire-contact"
-      name="contact"
-      action="#"
+      action="https://formspree.io/f/mredonbp"
       method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
       onsubmit="gererEnvoi(event)"
       novalidate
       aria-label="Formulaire de contact"
     >
 
-      <input type="hidden" name="form-name" value="contact">
-
-      <p class="champ-honeypot" hidden aria-hidden="true">
-        <label>Ne pas remplir ce champ : <input name="bot-field"></label>
-      </p>
+      <!-- Honeypot anti-spam Formspree : invisible aux humains.
+           Si rempli par un bot, Formspree rejette silencieusement la soumission. -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+             aria-hidden="true" style="position:absolute; left:-9999px;">
 
       <div class="champs-nom">
         <div class="champ">
@@ -117,9 +114,9 @@ pageActuelle: "contact"
 </main>
 
 <script>
-  /* Soumission AJAX vers Netlify Forms.
-     Validation côté client + envoi en form-urlencoded vers la page courante.
-     Le formulaire est détecté par Netlify au build grâce à data-netlify="true". */
+  /* Soumission AJAX vers Formspree (https://formspree.io/f/mredonbp).
+     Validation côté client + envoi en JSON. Formspree accepte nativement
+     application/json et envoie les confirmations par email à contact@toutauchaudme.ch. */
   function gererEnvoi(e) {
     e.preventDefault();
 
@@ -127,6 +124,7 @@ pageActuelle: "contact"
     const confirmation = document.getElementById("confirmation-envoi");
     const bouton = form.querySelector("button[type='submit']");
 
+    // Validation minimale des champs requis
     const champs = form.querySelectorAll("[required]");
     let valide = true;
     champs.forEach(function (champ) {
@@ -143,12 +141,16 @@ pageActuelle: "contact"
     const texteOrigine = bouton.textContent;
     bouton.textContent = "Envoi en cours…";
 
-    const donnees = new URLSearchParams(new FormData(form)).toString();
+    // Envoi à Formspree en JSON
+    const donnees = Object.fromEntries(new FormData(form));
 
-    fetch("/", {
+    fetch(form.action, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: donnees
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(donnees)
     })
       .then(function (reponse) {
         if (!reponse.ok) throw new Error("Réponse HTTP " + reponse.status);
