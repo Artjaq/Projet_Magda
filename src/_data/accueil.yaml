@@ -3,21 +3,30 @@ hero:
   titre: toutauchaudME
   tagline: >-
     est mon atelier de couture où, lors de mes loisirs, je crée des vêtements
-    simples et confortables, sans oublier un brin d'élégance et d'originalité...
+    simples et confortables, sans oublier un brin d'élégance et d'originalité;
 
     c'est dire que c'est fait avec passion et soin !
-  bouton: Prendre contact
+  bouton: prendre contact
   image: ""
-  image_alt: ""
+  image_alt: "face à la nature qui m'inspire, je laisse aller mon imagination... "
 pieces:
-  titre: Les pièces
-  sous_titre: Chaque création est unique, réalisée à la main avec des matières
-    soigneusement sélectionnées au fil des saisons.
+  titre: les vêtements
+  sous_titre: >
+    chaque pièce est unique et existe en une seule talle; tu ne rencontreras
+    personne d'autre habillé comme toi...
 fil_conducteur:
-  titre: Un fil conducteur
-  texte: Depuis plus de trente ans, Magda coud, tricote et assemble des pièces qui
-    traversent les saisons. Chaque vêtement porte la trace d'un geste réfléchi,
-    d'un choix de matière attentionné, d'un fil tiré avec soin. Ici, rien n'est
-    fait en série. Tout est pensé pour durer.
-  lien_label: Découvrir son histoire →
+  titre: un fil conducteur
+  texte: >-
+    branché à la mode du moment et a-temporel à la fois
+
+    chic, casual, décontracté... selon les accessoires dont tu l'assortiras et qui feront la différence
+
+    en matière naturelle (lin, coton, laine, soie) pour un toucher agréable et entretien facile...
+
+    tout est pensé pour durer !
+  lien_label: "j'ai toujours vu ma mère coudre pour nous confectionner des habits,
+    mais c'était par besoin... j'ai de la chance de le faire pour à côté de mes
+    divers engagements car j'adore travailler de mes mains et non seulement avec
+    ma tête; confectionner des vêtements est une manière de m'exprimer, me faire
+    et faire plaisir...  "
   image: ""
