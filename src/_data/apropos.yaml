@@ -1,37 +1,52 @@
-# Contenu de la page À propos — modifiable via Decap CMS → "Page À propos"
-
-surtitre: "La créatrice"
-titre_page: "L'atelier de Magda"
+surtitre: La créatrice
+titre_page: L'atelier de Magda
 image_bio: ""
-titre_bio: "Trente ans<br>de fil en aiguille"
-# Arthur : titre_bio contient un <br> pour reproduire le saut de ligne du design original.
-# Affiché avec | safe dans le template. Magda ne devrait pas modifier ce champ seule.
+titre_bio: J'ai presque toujours cousu...
+biographie: >-
+  ... peut-être parce que j'avais toujours vous ma mère nous coudre des habits
+  alors que ce n'était pas son métier à la base. Dans le pays où je vivais, à
+  l'époque, c'était une nécessité si on voulais avoir quelque chose de joli à
+  porter sur soi. Heureusement les choses ont bien changée depuis...   
 
-biographie: |
-  Tout a commencé avec une machine à coudre héritée de sa grand-mère et une armoire pleine de coupons de tissu. Magda a appris en observant, en défaisant, en recommençant — jusqu'à ce que les gestes deviennent naturels, presque instinctifs. Depuis lors, l'atelier n'a jamais cessé de bourdonner.
 
-  Installée en Suisse romande depuis toujours, elle puise son inspiration dans les paysages qui l'entourent : la laine couleur de sous-bois en automne, le lin ivoire des brumes matinales, les textures rugueuses des montagnes. Chaque pièce est une réponse à une saison, à une humeur, à une envie de matière.
+  Moi non plus ce n'est pas mon métier dans lequel j'ai toujours travaillé bien plus avec ma tête qu'avec mes mains. Alors que je suis très manuelle ! J'aime toucher les tissus; en regarder un bout et imaginer ce qu'il pourrait devenir en prenant forme, ciseaux et aiguilles aidant. 
 
-  Ce qui distingue le travail de Magda, c'est l'attention portée à chaque détail invisible : la couture intérieure aussi soignée que l'extérieur, le choix d'un bouton assorti au grain du tissu, l'ourlet qui tombe juste. Des petits riens qui font qu'un vêtement se porte pendant des années, et qu'on ne se résout jamais vraiment à s'en séparer.
 
-lien_bio_label: "Contacter Magda →"
+  J'ai pris des cours de couture et je me suis lancée dans la confection d'habits simples et confortables pour mes enfants et moi-même. Ja' tâtonne, j'ai fait, j'ai défait, je recommenceçais...
 
+
+  Jusqu'a ce qu'une amie organise une exposition au Château de La Sarraz, "Balthazar festival", où artistes et artisans de tout genre dévoilent leurs oeuvres au plus grand public que leur entourage le plus proche. elle m'a encouragé à y prendre part avec une série de gilets tout douillets à s'emballer dedans, avec un bon bouquin au coin du feu un soir de bourrasque. D'où le logo "toutauchaudME".  
+
+
+  Comme les saisons changent sous nos latitudes, et que c'est agréable de varier les plaisirs, j'ai continué à tâtonner et jouer avec des matières et des formes différentes. Jupes, pantalons, robes, blouses, vestes, d'hivers et d'été... il y de quoi faire si on laisse son imagination vagabonder...
+lien_bio_label: Contacter Magda →
 processus:
-  titre: "Mon processus"
-  sous_titre: "De la pelote au vêtement, chaque étape est réalisée à la main, sans précipitation."
+  titre: "Ma démarche est très spontanée: "
+  sous_titre: >-
+    Une belle matière donne en général quelque chose de beau...
+
+    Et il m'arrive souvent de "détourner" la destination "première" du tissus, car je na'i jamais trop aimé suivre les recettes au pied de la lettre. 
   etapes:
-    - titre: "Les matières"
+    - titre: "P'tit coup de foudre... "
+      texte: Je vois un tissus; il me plaît, il me fait plaisir à toucher alors j'en
+        achète un bout sans encore vraiment savoir ce que je vais en faire, et
+        souvent la petite idée de départ aboutit à quelque chose de très
+        différent. Il repose un moment jusqu'à ce que quelqu'un s'y intéresse
+        pour me commander un habit, ou que j'ai l'idée irrésistible d'en faire
+        un.
+    - titre: La conception
+      texte: "Avant de couper la moindre pièce, j'ajuste un patron dont je vais me
+        servir. Ils sont souvent inspirés d'autres vêtements, mais toujours
+        re-visités. Les formes simples sont une valeur sûre; ce sont les détails
+        qui font (presque) toujours la différence.\ 
+
+        \  "
+    - titre: La confection
       texte: >-
-        Tout commence par le choix du fil ou du tissu. Magda privilégie les matières naturelles —
-        laine vierge, alpaga, lin, coton biologique — sélectionnées auprès de petits fournisseurs
-        ou chinées dans des marchés spécialisés. La main du tissu, c'est le premier critère.
-    - titre: "La conception"
-      texte: >-
-        Avant de couper la moindre pièce, Magda dessine, ajuste, froisse et recommence.
-        Ses patrons naissent sur papier, souvent inspirés de formes anciennes revisitées.
-        Elle pense chaque vêtement pour qu'il s'adapte au corps qui le portera, et non l'inverse.
-    - titre: "La confection"
-      texte: >-
-        L'assemblage se fait pièce par pièce, à la machine ou entièrement à la main selon les étapes.
-        Chaque finition est vérifiée, chaque couture pressée. Une pièce n'est prête que lorsqu'elle
-        est parfaite — même dans les endroits que personne ne verra jamais.
+        L'assemblage et une étape fascinante car tout prend enfin forme, mais
+        tout peut encore changer... car c'est l'habit qui doit s'adapter au
+        corps et non inverse et d'autres idées naissent encore en court de
+        route; un pli supplémentaire, un arrondi à accentuer ou contraire à
+        réduire; il faut souvent de la souplesse et quelques astuces imprévus.
+
+        Puis, viennent les finitions; c'est essentiel. je les soigne avec la plus grande attention. Une pièce n'est prête que lorsqu'elle est "bien finie" dans les moindres détails, même dans les endroits que l'on ne voit pas.
