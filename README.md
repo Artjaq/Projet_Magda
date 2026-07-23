@@ -141,4 +141,4 @@ flowchart LR
 
 ## Auteur
 
-**Arthur Jaquier** — [GitHub](https://github.com/Artjaq) · LinkedIn [à compléter]
+**Arthur Jaquier** — [GitHub](https://github.com/Artjaq) 
