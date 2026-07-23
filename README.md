@@ -1,114 +1,114 @@
 # Tout au Chaud
 
-**Site vitrine statique avec CMS headless pour une artisane textile**
+Site vitrine statique avec interface d'administration en français, pour une artisane textile qui gère elle-même son contenu.
 
-![Eleventy](https://img.shields.io/badge/Eleventy-v3-black?logo=eleventy)
-![Decap CMS](https://img.shields.io/badge/Decap_CMS-v3-FF6B6B)
-![Netlify](https://img.shields.io/badge/Netlify-deployed-00C7B7?logo=netlify)
-![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue)
+## Description
 
-## Aperçu
+Projet réalisé pour Magda, créatrice de vêtements faits main en Suisse romande, sans aucune compétence technique. L'objectif : lui donner une présence en ligne qu'elle peut faire vivre seule — ajouter une pièce, changer une photo, corriger un texte — sans repasser par un développeur à chaque modification, et sans coût d'hébergement récurrent.
 
-Site vitrine 3 pages pour Magda, créatrice de vêtements artisanaux en Suisse romande, avec interface d'administration autonome. Zéro dépendance front-end, hébergement à 0 CHF/mois.
+La réponse technique est une architecture Jamstack : Eleventy compile des templates Nunjucks et des données YAML/Markdown en HTML statique, Decap CMS fournit une interface d'édition entièrement traduite en français, et chaque enregistrement dans l'admin déclenche un commit Git puis un redéploiement automatique sur Netlify. Aucune base de données, aucun framework front-end, aucune dépendance JavaScript côté visiteur : le CSS et le JS sont écrits à la main (menu responsive, carousel de pièces, validation et envoi AJAX du formulaire de contact).
 
-🔗 [projetmagda.netlify.app](https://projetmagda.netlify.app)
+L'intérêt du projet est moins dans la complexité technique que dans le compromis : faire tenir un CMS utilisable par une non-technicienne dans un site qui reste un dossier de fichiers HTML servis par un CDN.
 
-![Aperçu du site](./docs/screenshot.png)
+## Site en ligne
 
-### Déploiement sur Netlify
-
-**Étape 1 — Connecter le dépôt**
-- Va sur [netlify.com](https://netlify.com) → "Add new site" → "Import an existing project"
-- Sélectionne le dépôt GitHub
-- Netlify lit automatiquement `netlify.toml` : commande `npm run build`, dossier de publication `_site`
-- Lance le premier déploiement
-
-**Étape 2 — Activer Netlify Identity**
-- Dashboard du site → "Site settings" → "Identity" → **Enable Identity**
-- Dans "Registration preferences" → sélectionne **Invite only**
-  *(seule Magda peut se connecter, pas n'importe qui)*
-
-**Étape 3 — Activer Git Gateway**
-- Toujours dans "Identity" → "Services" → **Enable Git Gateway**
-- Cela permet à Decap CMS de committer directement sur GitHub au nom de Magda
-
-**Étape 4 — Inviter Magda**
-- "Identity" → "Invite users" → entre l'adresse email de Magda
-- Elle reçoit un email avec un lien pour définir son mot de passe
-- Elle accède ensuite à `toutauchaudme.ch/admin`
-
-### Ajouter un nouveau champ éditable
-
-1. Ouvre [src/admin/config.yml](src/admin/config.yml)
-2. Trouve la collection ou le fichier concerné (cherche le `label` en français)
-3. Ajoute un bloc dans la liste `fields:` :
-   ```yaml
-   - label: "Nom affiché dans l'interface"
-     name: "cle_dans_le_yaml"
-     widget: "string"   # ou : text, markdown, image, number…
-     hint: "Explication pour Magda"
-     required: false
-   ```
-4. Ajoute la même clé dans le fichier YAML correspondant (`src/_data/xxx.yaml`)
-5. Utilise la variable dans le template Nunjucks : `{{ accueil.nouvelle_cle }}`
-
-Widgets disponibles : `string`, `text`, `markdown`, `image`, `number`, `boolean`, `list`, `object`.  
-Référence complète : https://decapcms.org/docs/widgets/
-
-## Le projet en bref
-
-**Commanditaire :** Magda, 65 ans, artisane textile non-technique. Aucune connaissance en développement web.
-
-**Problème :** présenter ses créations en ligne et pouvoir en ajouter ou modifier sans dépendre d'un développeur pour chaque changement de texte ou de photo.
-
-**Fonctionnalités :**
-- 3 pages (accueil, à propos, contact) avec design artisanal en CSS vanilla
-- Grille de pièces dynamique, triée et éditables via CMS
-- Interface d'administration en français, accessible depuis un navigateur
-- Formulaire de contact (prêt à brancher sur Formspree)
-- Navigation responsive avec menu hamburger
-
-Le formulaire est actuellement en mode "démo" (affiche un message de confirmation sans envoyer).
+**[toutauchaudme.ch](https://toutauchaudme.ch)** — interface d'administration sur [/admin](https://toutauchaudme.ch/admin) (accès restreint).
 
 ## Stack technique
 
-| Technologie | Rôle | Pourquoi |
-|---|---|---|
-| **Eleventy v3** | Générateur de site statique | Minimaliste, sans opinion sur le CSS/JS, templates proches du HTML |
-| **Nunjucks** | Moteur de templates | Syntaxe lisible, boucles et filtres suffisants pour ce projet |
-| **YAML** (`src/_data/`) | Données éditables | Format lisible par un humain, natif dans Eleventy |
-| **Decap CMS v3** | Interface d'édition | CMS headless open source, s'intègre à n'importe quel repo Git |
-| **DecapBridge** | Authentification PKCE | Remplace Netlify Identity, aucun secret côté client |
-| **Netlify** | Hébergement + CI/CD | Build déclenché par chaque push, CDN global, tier gratuit suffisant |
-| **CSS / JS vanilla** | Style et interactions | Aucune dépendance, rendu identique au prototype initial |
+| Technologie | Rôle |
+|---|---|
+| **Eleventy v3** (`@11ty/eleventy`) | Générateur de site statique |
+| **Nunjucks** | Moteur de templates (`.njk`) |
+| **Markdown** (`markdown-it`) | Contenu des pièces + rendu de la biographie via un filtre custom |
+| **YAML** (`js-yaml`) | Données éditables (`src/_data/`), chargées via `addDataExtension` |
+| **Decap CMS v3** | Interface d'édition headless, servie depuis `/admin` |
+| **DecapBridge** | Authentification PKCE du CMS (remplace Netlify Identity) |
+| **Formspree** | Traitement du formulaire de contact (envoi AJAX + honeypot anti-spam) |
+| **Netlify** | Hébergement, build à chaque push, CDN |
+| **CSS / JavaScript vanilla** | Styles et interactions, sans build ni dépendance |
 
-### Comment accéder à l'interface d'administration
+## Fonctionnalités principales
 
-## Décisions & trade-offs
+- **Édition autonome du contenu** : textes, photos et coordonnées sont stockés en YAML/Markdown et modifiables depuis l'interface admin, sans toucher au code.
+- **Collection de pièces** : un fichier Markdown par création, trié par un champ `ordre`, générant automatiquement une page dédiée (`/pieces/<slug>/`) via un permalink dynamique.
+- **Carousel d'accueil** en JS vanilla (navigation par flèches, recalcul du décalage au redimensionnement avec debounce).
+- **Formulaire de contact** branché sur Formspree : validation côté client, envoi en JSON sans rechargement, champ honeypot `_gotcha` contre les bots.
+- **Navigation responsive** avec menu hamburger accessible (`aria-expanded`, fermeture au clic extérieur et au passage en desktop).
+- **Publication automatique** : chaque enregistrement dans le CMS produit un commit Git signé du nom de l'éditrice, qui déclenche le build et le déploiement.
+- **SVG inlinés** via un shortcode Eleventy custom, pour que le logo hérite de `currentColor`.
 
-### Site statique plutôt que CMS classique
+## Aperçu visuel
 
-Le premier réflexe pour un client non-technique est souvent WordPress ou Shopify. Ces outils gèrent bien l'édition de contenu, mais ils embarquent une infrastructure (base de données, serveur PHP, mises à jour de sécurité, plugins) dont les besoins de ce projet ne justifient pas le coût — ni en argent (5–30 CHF/mois pour un hébergement WordPress décent), ni en maintenance. Un site de trois pages sans stock, sans panier et sans commentaires n'a pas besoin d'un CMS à part entière : il a besoin qu'une non-technicienne puisse changer un texte ou uploader une photo. L'architecture statique répond à ce besoin avec un coût d'hébergement nul, une surface d'attaque quasi inexistante (pas de base de données, pas de PHP, pas de sessions) et des performances CDN par défaut.
+<!-- capture d'écran à ajouter -->
 
-Le compromis accepté : pas de recherche dynamique, pas de filtrage en temps réel sur les pièces. Ces fonctionnalités n'étaient pas dans le cahier des charges.
+## Installation locale
+
+```bash
+git clone https://github.com/Artjaq/Projet_Magda.git
+cd Projet_Magda
+npm install
+npm run dev      # serveur de développement sur http://localhost:8080
+```
+
+Build de production :
+
+```bash
+npm run build    # génère le site statique dans _site/
+```
+
+Aucune variable d'environnement n'est nécessaire pour le développement local. L'interface `/admin` requiert en revanche l'authentification DecapBridge et ne fonctionne que sur le site déployé.
+
+Le déploiement Netlify est configuré par [netlify.toml](netlify.toml) (commande `npm run build`, dossier publié `_site`, Node 20).
+
+## Structure du projet
+
+```
+src/
+├── _data/              → Contenu éditable (YAML, exposé globalement par Eleventy)
+│   ├── site.yaml           Nom, slogan, email, Instagram
+│   ├── accueil.yaml        Hero, grille de pièces, section présentation
+│   ├── apropos.yaml        Biographie, photo, processus
+│   └── contact.yaml        Textes et coordonnées
+├── _includes/          → Templates partagés (Nunjucks)
+│   ├── base.njk            Layout : <head>, header, footer, scripts
+│   ├── header.njk          Navigation + menu hamburger
+│   ├── footer.njk          Pied de page
+│   └── piece.njk           Layout d'une page pièce
+├── pieces/             → Une pièce = un fichier .md (+ pieces.json pour layout/permalink)
+├── uploads/            → Images envoyées depuis le CMS
+├── admin/              → Decap CMS (index.html + config.yml des champs éditables)
+├── logo/               → SVG inlinés par le shortcode {% svg %}
+├── index.njk           → Accueil
+├── apropos.njk         → À propos
+├── contact.njk         → Contact (formulaire Formspree)
+├── styles.css          → CSS vanilla, copié tel quel
+└── scripts.js          → JS vanilla (menu mobile, carousel)
+```
+
+Configuration Eleventy (filtres `markdownify` / `zerofill`, shortcode `svg`, collection `pieces`, passthrough copies) : [.eleventy.js](.eleventy.js).
+
+Les fichiers HTML/CSS/JS à la racine du dépôt correspondent au prototype statique antérieur à la migration Eleventy, conservé hors du build (`input: src`). [à compléter : les supprimer ou les archiver]
+
+## Décisions techniques
+
+### Site statique plutôt que WordPress
+
+Le réflexe habituel pour un client non-technique est WordPress. Mais un site de trois pages sans stock, sans panier et sans commentaires n'a pas besoin d'une base de données, d'un serveur PHP ni de mises à jour de sécurité mensuelles : il a besoin qu'une non-technicienne puisse changer un texte ou envoyer une photo. L'architecture statique répond à ce besoin avec un hébergement à coût nul, une surface d'attaque quasi inexistante et des performances CDN par défaut.
+
+Compromis accepté : pas de recherche ni de filtrage dynamique sur les pièces — hors cahier des charges.
 
 ### Eleventy plutôt que Hugo, Astro ou Next.js
 
-Hugo aurait été plus rapide à compiler, mais son langage de templates Go devient difficile à déboguer dès qu'on sort des cas standards — et le projet nécessitait des filtres personnalisés (rendu Markdown avec classe CSS injectée, formatage de numéros). Next.js est surdimensionné pour un site statique sans interactivité côté client ; son export statique ajoute une couche de configuration sans bénéfice ici. Astro est une option sérieuse, mais son modèle par composants aurait imposé de réécrire le CSS existant autour de styles scopés, perdant le bénéfice d'une feuille de styles vanilla déjà travaillée.
+Hugo compile plus vite, mais son langage de templates devient pénible à déboguer dès qu'on sort des cas standards, et le projet demandait des filtres personnalisés (rendu Markdown avec classe CSS injectée, formatage de numéros). Next.js est surdimensionné pour un site sans interactivité côté serveur. Astro était une option sérieuse, mais son modèle par composants aurait imposé de réécrire une feuille de styles vanilla déjà aboutie autour de styles scopés.
 
-Eleventy a été retenu pour sa posture minimaliste : il compile des templates Nunjucks en HTML statique, copie les fichiers CSS/JS sans les transformer, et ne prend aucune opinion sur l'architecture front-end. Le seul point de friction rencontré : le support des fichiers `.yaml` pour les données globales n'est plus activé par défaut en v3, contrairement à v2 — résolu par un appel à `addDataExtension("yaml,yml", ...)` dans la configuration.
+Point de friction rencontré : en Eleventy v3, les fichiers `.yaml` ne sont plus chargés par défaut comme en v2 — résolu par `addDataExtension("yaml,yml", ...)`.
 
 ### DecapBridge plutôt que Netlify Identity
 
-Le projet a démarré avec Netlify Identity + Git Gateway, la combinaison historiquement recommandée pour Decap CMS. Deux raisons ont motivé la migration. D'abord, Netlify Identity est une fonctionnalité secondaire pour Netlify, progressivement déprioritisée et d'avenir incertain. Ensuite, l'architecture qu'elle impose charge le widget `netlify-identity-widget.js` sur chaque page du site public, y compris pour les visiteurs qui n'ont aucune raison de s'authentifier.
+Le projet a démarré sur Netlify Identity + Git Gateway, la combinaison historiquement recommandée pour Decap CMS. Deux raisons ont motivé la migration : Netlify Identity est une fonctionnalité secondaire pour Netlify, progressivement dépriorisée ; et son architecture charge `netlify-identity-widget.js` sur chaque page publique, y compris pour des visiteurs qui n'ont aucune raison de s'authentifier.
 
-DecapBridge est une solution dédiée à l'écosystème Decap CMS, maintenue activement, qui utilise un flux PKCE. Le résultat : aucun JavaScript d'authentification sur le site public, aucun secret stocké dans le dépôt, une interface admin qui reste à `/admin`. Le compromis est une dépendance supplémentaire envers un service tiers — acceptable pour un site vitrine à faible criticité, à réévaluer pour un contexte plus sensible.
-
-### Authentification PKCE plutôt qu'OAuth maison
-
-Implémenter soi-même un flux OAuth pour donner accès au CMS implique un serveur, la gestion de secrets et une surface d'attaque à maintenir dans le temps. Le PKCE via DecapBridge délègue ce problème à un service spécialisé : le dépôt ne contient aucune clé privée, aucun token, aucune credential. Le seul élément semi-public dans le repo est l'identifiant de site dans les endpoints d'authentification — ce qui est attendu et sans risque dans un flux PKCE, où la sécurité repose sur un code verifier éphémère et non sur un secret statique.
-
----
+DecapBridge est dédié à l'écosystème Decap et utilise un flux PKCE : aucun JavaScript d'authentification sur le site public, aucun secret dans le dépôt (le seul identifiant présent dans `config.yml` est l'ID de site, semi-public par conception dans PKCE, où la sécurité repose sur un code verifier éphémère). Le compromis est une dépendance de plus envers un service tiers — acceptable ici, à réévaluer sur un projet plus critique.
 
 ## Architecture
 
@@ -130,61 +130,15 @@ flowchart LR
     V -->|visite le site| CDN
 ```
 
----
+## Documentation
 
-## Structure du projet
-
-```
-src/
-├── _data/              → Contenu éditable (YAML, lu par Eleventy)
-│   ├── site.yaml           Logo, email, Instagram (données globales)
-│   ├── accueil.yaml        Hero, grille de pièces, section présentation
-│   ├── apropos.yaml        Bio, photo, processus en 3 étapes
-│   └── contact.yaml        Textes et coordonnées de la page contact
-├── _includes/          → Templates partagés (Nunjucks)
-│   ├── base.njk            Layout de base : <head>, header, footer, scripts
-│   ├── header.njk          Navigation + menu hamburger
-│   └── footer.njk          Pied de page
-├── pieces/             → Collection : un fichier .md par pièce
-├── uploads/            → Images uploadées via Decap CMS
-├── admin/              → Interface Decap CMS
-│   ├── index.html          Page d'administration
-│   └── config.yml          Définition des collections et champs éditables
-├── index.njk           → Page accueil
-├── apropos.njk         → Page à propos
-├── contact.njk         → Page contact
-├── styles.css          → CSS vanilla (responsive, accessible)
-└── scripts.js          → JS vanilla (menu mobile)
-```
-
----
-
-## Lancer en local
-
-```bash
-git clone https://github.com/Artjaq/Projet_Magda.git
-cd Projet_Magda
-npm install
-npm run dev
-# → http://localhost:8080
-```
-
----
-
-## Documentation détaillée
-
-- [docs/DEPLOY.md](docs/DEPLOY.md) — déploiement Netlify, configuration DecapBridge, ajout de champs et collections
-- [docs/EDITION.md](docs/EDITION.md) — guide d'utilisation pour Magda (pas à pas, sans jargon technique)
-
----
+- [docs/DEPLOY.md](docs/DEPLOY.md) — déploiement Netlify, configuration DecapBridge, ajout de champs et de collections
+- [docs/EDITION.md](docs/EDITION.md) — guide d'utilisation pour l'éditrice, sans jargon technique
 
 ## Licence
 
 [MIT](LICENSE) — Arthur Jaquier, 2025
 
----
-
 ## Auteur
 
-**Arthur Jaquier**
-[GitHub](https://github.com/Artjaq) · [LinkedIn](#) <!-- Remplacer # par l'URL LinkedIn -->
+**Arthur Jaquier** — [GitHub](https://github.com/Artjaq) · LinkedIn [à compléter]
